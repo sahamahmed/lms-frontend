@@ -1,6 +1,7 @@
 'use client'
 import { FC, useState } from "react"
 import Header from "./components/Header"
+import Hero from "./components/Hero"
 
 
 interface Props{
@@ -14,6 +15,7 @@ const Page: FC<Props> = (props) => {
   return (
     <div>
       <Header open={open} setOpen={setOpen} activeItem={activeItem}/>
+      <Hero/>
     </div>
   )
 }
