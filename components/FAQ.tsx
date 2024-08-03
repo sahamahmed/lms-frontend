@@ -5,10 +5,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Image from "next/image";
 
 const FAQ = () => {
   return (
-    <div className="space-y-16">
+    <div className="">
       <h1 className="text-5xl text-[#4A1F64] font-normal text-center">
         Frequently Asked Questions
       </h1>
@@ -16,13 +17,13 @@ const FAQ = () => {
         <Accordion
           type="single"
           collapsible
-          className="text-[#4A1F64] w-[80%] text-xl"
+          className="text-[#4A1F64] w-[80%] text-xl space-y-4 mt-16"
         >
           <AccordionItem value="item-1">
             <AccordionTrigger className="font-semibold">
               Is it accessible?
             </AccordionTrigger>
-            <AccordionContent className="bg-[#86629c]">
+            <AccordionContent className="text-lg font-semibold">
               Yes. It adheres to the WAI-ARIA design pattern.
             </AccordionContent>
           </AccordionItem>
@@ -30,7 +31,7 @@ const FAQ = () => {
             <AccordionTrigger className="font-semibold">
               Is it accessible?
             </AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="text-lg font-semibold">
               Yes. It adheres to the WAI-ARIA design pattern.
             </AccordionContent>
           </AccordionItem>
@@ -38,7 +39,7 @@ const FAQ = () => {
             <AccordionTrigger className="font-semibold">
               Is it accessible?
             </AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="text-lg font-semibold">
               Yes. It adheres to the WAI-ARIA design pattern.
             </AccordionContent>
           </AccordionItem>
@@ -46,13 +47,13 @@ const FAQ = () => {
             <AccordionTrigger className="font-semibold">
               Is it accessible?
             </AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="text-lg font-semibold">
               Yes. It adheres to the WAI-ARIA design pattern.
             </AccordionContent>
           </AccordionItem>
         </Accordion>
         <div className="flex items-center flex-col gap-6 ">
-          <img src="faq boy.png" alt="" />
+          <Image src="/faq boy.png" alt="" height={1000} width={1000} className="h-44 w-40"/>
           <div className="text-center">
             {" "}
             <h3 className="text-[#4A1F64] text-[30px] font-medium">
@@ -63,10 +64,6 @@ const FAQ = () => {
             </p>
           </div>
           <div className="w-full">
-            {" "}
-            <h4 className="text-[18px] mb-2 text-gray-800 font-medium">
-              Let Us Know.
-            </h4>
             <input
               type="text"
               placeholder="Enter Here.."
