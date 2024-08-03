@@ -8,6 +8,7 @@ import Metrics from "@/components/Metrics"
 import PopularCourses from "@/components/PopularCourses"
 import Feedback from "@/components/Feedback"
 import FAQ from "@/components/FAQ"
+import Footer from "@/components/Footer"
 
 interface Props{
 
@@ -33,6 +34,7 @@ const Page: FC<Props> = (props) => {
       <Seperator />
       <FAQ />
       <Seperator />
+      <Footer />
     </div>
   )
 }
