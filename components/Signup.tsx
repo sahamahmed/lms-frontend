@@ -106,7 +106,15 @@ const Signup = () => {
               Create Account
             </h1>
             <div className="flex flex-col items-center gap-y-[10px]">
-             
+              <div className="flex gap-x-[10px]">
+                <FcGoogle className="border rounded-3xl px-1 py-1 border-gray-400 text-4xl cursor-pointer"
+                  onClick={() => signIn('google')}
+                  size={40} />
+                <VscGithub className="border rounded-3xl px-1 py-1 border-gray-400 cursor-pointer" size={40}
+                  onClick={() => signIn('github')}
+                />
+              </div>
+              <p className="text-gray-400">Or use your email for login</p>
             </div>
           </div>
           <Form {...form}>

@@ -5,6 +5,8 @@ import ThemeSwitcher from "../utils/theme-switcher";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { IoNotificationsOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
+import { Dice1 } from "lucide-react";
 
 const navItems = [
   {
@@ -25,6 +27,9 @@ const Navbar = () => {
   const [active, setActive] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const params = usePathname();
+
+  const {user} = useSelector((state: any) => state.auth)
+
 
   // if (typeof window !== 'undefined') {
   //   window.addEventListener('scroll', () => {
@@ -102,12 +107,27 @@ const Navbar = () => {
 
               <IoNotificationsOutline className="text-[#4A1F64] text-2xl" />
 
-              <Link
-                href="/signup"
-                className="text-[#ebe8ec] bg-gradient-to-r from-[#4A1F64] to-[#CAADF0] py-2 px-6 rounded-full font-normal"
-              >
-                signup
-              </Link>
+              {
+                user && user.avatar.url  && (
+                  <Link href={'/profile'}>
+                    <Image src={user?.avatar?.url || '/user.png'} alt="user" width={100} height={100} className="rounded-full h-8 w-8" />
+                  </Link>
+                )
+              }
+
+
+              {
+                params !== "/login" && params !== "/signup" && (
+                  (
+                    <Link href="/signup"
+                      className="text-[#ebe8ec] bg-gradient-to-r from-[#4A1F64] to-[#CAADF0] py-2 px-6 rounded-full font-normal"
+                    >
+                      signup
+                    </Link>
+                  )
+                )
+              }
+
             </div>
           </div>
         </div>

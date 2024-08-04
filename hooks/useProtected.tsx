@@ -7,11 +7,11 @@ interface Props {
     children: React.ReactNode
 }
 
-const useProtected: FC<Props> = ({children}) => {
+const UseProtected: FC<Props> = ({children}) => {
     const isAuthenticated = UserAuth()
 
     return isAuthenticated ? children : redirect('/login')
 
 }
 
-export default useProtected
+export default UseProtected

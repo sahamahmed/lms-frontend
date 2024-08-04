@@ -67,3 +67,52 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Width and height of the scrollbar */
+::-webkit-scrollbar {
+  width: 6px; /* Width of vertical scrollbar */
+  height: 10px; /* Height of horizontal scrollbar */
+}
+
+/* Track (the area behind the scrollbar) */
+::-webkit-scrollbar-track {
+  background: #d4d3d3; /* Background color of the track */
+}
+
+/* Handle (the draggable part of the scrollbar) */
+::-webkit-scrollbar-thumb {
+  background: #7c7272; /* Color of the scrollbar handle */
+  border-radius: 6px; /* Border radius of the scrollbar handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #474141; /* Color of the scrollbar handle on hover */
+}
+
+/* Use the Inter font in your body */
+body {
+  font-family: 'Inter', sans-serif;
+}
+.custom-row {
+  font-weight: bold;
+  color: white;
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnHeaderTitleContainer {
+  font-weight: bold;
+  font-size: large;
+  color: black;
+}

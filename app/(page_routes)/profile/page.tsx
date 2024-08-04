@@ -13,14 +13,18 @@ import UserInfo from "@/components/UserInfo";
 import UserPassword from "@/components/userPassword";
 import EnrolledCourses from "@/components/EnrolledCourses";
 import Link from "next/link";
+import { RiAdminLine } from "react-icons/ri";
+import { useRouter } from "next/navigation";
+import UseProtected from "@/hooks/useProtected";
 
 const Page = () => {
   const { user } = useSelector((state: any) => state.auth);
-  // console.log(user)
+  console.log(user)
   const [tab, setTab] = React.useState("My Account");
   const [logoutState, setLogoutState] = React.useState(false);
   const data = useSession();
   console.log(data);
+  const router = useRouter()
 
   const sections = [
     {
@@ -46,15 +50,20 @@ const Page = () => {
   ];
 
   useLogoutQuery(undefined, {
-    skip: !logoutState,
+    skip: !logoutState ? true : false,
   });
 
   const logoutHandler = async () => {
     if (data.data !== null) {
+      console.log('if ran')
       await signOut();
-    } else if (data === null) {
+    } 
+    if (data.data === null) {
+      console.log('else ran')
       setLogoutState(true);
     }
+
+    // router.push('/')
   };
 
   const handleTabClick = (label: string) => {
@@ -68,6 +77,7 @@ const Page = () => {
 
   return (
     <>
+    <UseProtected>
       <div className="px-28 py-5 mx-auto w-full flex gap-10 ">
         <div className="bg-[#4A1F64] min-h-[30rem] w-[25%] rounded-lg flex flex-col pb-4">
           {sections.map((section, index) => (
@@ -92,6 +102,7 @@ const Page = () => {
                 className={`py-4 border-b border-b-slate-200 cursor-pointer `}
               >
                 <div className="flex justify-start items-center gap-3 px-6">
+                    <RiAdminLine size={26} className="text-white"/>
                   <h1 className="text-white text-xl font-normal">
                     {" "}
                     Admin Dashboard
@@ -110,6 +121,7 @@ const Page = () => {
           {tab === "Enrolled Courses" && <EnrolledCourses user={user} />}
         </div>
       </div>
+      </UseProtected>
     </>
   );
 };
