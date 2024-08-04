@@ -8,7 +8,6 @@ import Image from "next/image";
 const Header = () => {
   return (
     <div className="space-y-8 min-h-full h-auto">
-      <Navbar />
       <div className="grid grid-cols-12">
         <div className=" col-span-8 z-10">
           <div className="flex flex-col justify-center gap-2 h-full">

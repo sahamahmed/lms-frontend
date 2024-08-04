@@ -15,7 +15,7 @@ import { TfiMenuAlt } from "react-icons/tfi";
 const CourseCard = () => {
   return (
     <Link href={`/`}>
-      <Card className="opacity-70 px-4 pt-4 pb-2 bg-transparent  cursor-pointer  hover:opacity-100 h-[24rem] rounded-xl floating-effect border-none relative shadow-lg shadow-gray-800 hover:bg-gradient-to-br hover from-purple-950 to-transparent">
+      <Card className=" px-4 pt-4 pb-2   cursor-pointer  hover:opacity-100 h-[24rem] rounded-xl border-none relative shadow-lg shadow-gray-800 hover:bg-gradient-to-br hover from-purple-950 to-transparent transition ease-out duration-500">
         <div className="relative w-full h-[55%] border border-[4A1F64]">
           <Image
             src={"/computer.png"}

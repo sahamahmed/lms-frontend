@@ -26,6 +26,7 @@ import { ifError } from 'assert';
 import { toast } from 'sonner';
 import Verification from './Verification';
 import { signIn } from 'next-auth/react';
+import Navbar from './Navbar';
 
 
 
@@ -64,7 +65,7 @@ const Signup = () => {
 
 
   return (
-    <div >
+    <div  >
       <div
         style={{
           backgroundImage: "url(/registerbg.png)",
@@ -75,8 +76,10 @@ const Signup = () => {
           height: "100%",
           width: "100%"
         }}
-        className={`relative ${openVerification ? 'filter blur-sm' : ''}`}
+        className={`relative ${openVerification ? 'filter blur-sm' : ''} py-5`}
       >
+        <Navbar />
+
         <div className="flex flex-col items-center justify-center gap-y-[21px] absolute top-[25%] left-[8%] ">
           <h1 className="text-[57px] font-bold text-[#5B2C78]">
             Welcome Back!

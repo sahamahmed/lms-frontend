@@ -1,3 +1,4 @@
+'use client'
 import Link from "next/link";
 import React, { useState } from "react";
 import ThemeSwitcher from "../utils/theme-switcher";
@@ -36,7 +37,7 @@ const Navbar = () => {
   // }
 
   return (
-    <div className="w-full relative">
+    <div className="w-full relative z-50 px-28 py-5 ">
       <div
         className={`${
           active

@@ -24,6 +24,7 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { signIn, useSession } from 'next-auth/react';
 import { useSelector } from 'react-redux';
+import Navbar from './Navbar';
 
 const Login = () => {
   const [login, { data, error, isSuccess}] = useLoginMutation()
@@ -31,7 +32,6 @@ const Login = () => {
   const {data: sessionData}  = useSession()
   console.log(sessionData)
   const {user} = useSelector((state:any) => state.auth)
-
   const [sociallogin, { error: socialError, isSuccess: socialSuccess, data:socialData}] = useSocialLoginMutation()
 
 
@@ -48,15 +48,7 @@ const Login = () => {
         }
 
 
-        if (socialSuccess) {
-          console.log("#######################################")
-
-          console.log(data.message);
-          console.log("#######################################")
-
-          toast.success(`Welcome ${socialData.user.name}`);
-          router.push("/");
-        }
+       
       }
 
    
@@ -65,6 +57,13 @@ const Login = () => {
     handleSocialLogin();
   }, [sessionData, socialSuccess, user]);
 
+
+  useEffect(() => {
+    if (socialSuccess) {
+      toast.success(`Welcome ${socialData.user.name}`);
+      router.push("/");
+    }
+  }, [socialSuccess, socialData, router])
 
 
   useEffect(() => {
@@ -113,6 +112,8 @@ const Login = () => {
         }}
         className='h-full'
       >
+
+        <Navbar />
 
         <div className="absolute flex gap-y-[21px] flex-col items-center top-[25%] left-[8%] w-[500px]">
           <div className="flex flex-col items-center gap-y-[10px]">

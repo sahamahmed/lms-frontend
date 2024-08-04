@@ -6,6 +6,8 @@ import { ThemeProvider } from "../utils/theme-provider";
 import Providers from "./Provider";
 import { Toaster } from "sonner";
 import AuthProvider from "@/utils/sessionProvider";
+import { FC, ReactNode } from "react";
+import Navbar from "@/components/Navbar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -35,7 +37,7 @@ export default function RootLayout({
         <Providers>
           <AuthProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              {children}
+                {children}
               <Toaster position="top-center" richColors />
             </ThemeProvider>
           </AuthProvider>
@@ -44,3 +46,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+
