@@ -108,7 +108,7 @@ const Navbar = () => {
               <IoNotificationsOutline className="text-[#4A1F64] text-2xl" />
 
               {
-                user && user.avatar.url  && (
+                user  && (
                   <Link href={'/profile'}>
                     <Image src={user?.avatar?.url || '/user.png'} alt="user" width={100} height={100} className="rounded-full h-8 w-8" />
                   </Link>
