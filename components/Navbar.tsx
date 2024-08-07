@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Link from "next/link";
 import React, { useState } from "react";
 import ThemeSwitcher from "../utils/theme-switcher";
@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { Dice1 } from "lucide-react";
+import "/App.css";
 
 const navItems = [
   {
@@ -28,8 +29,7 @@ const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
   const params = usePathname();
 
-  const {user} = useSelector((state: any) => state.auth)
-
+  const { user } = useSelector((state: any) => state.auth);
 
   // if (typeof window !== 'undefined') {
   //   window.addEventListener('scroll', () => {
@@ -42,12 +42,12 @@ const Navbar = () => {
   // }
 
   return (
-    <div className="w-full relative z-50 px-28 py-5 ">
+    <div className="w-full relative z-50 py-5 ">
       <div
         className={`${
           active
-            ? "bg-no-repeat bg-blue-700 dark:bg-opacity-45 dark:bg-red-950 fixed top-0 left-0 w-full h-[80px] z-[80] border-b dark:border-[#167c52]"
-            : "bg-no-repeat bg-transparent dark:bg-green-900  w-full h-[80px] z-[80] border-y-[1.5px] border-[#5B2C78] dark:border-[#127463] dark:shadow"
+            ? "bg-no-repeat bg-blue-700 dark:bg-opacity-45 dark:bg-red-900 fixed top-0 left-0 w-full h-[80px] z-[80] border-b dark:border-[var(--darkline)]"
+            : "bg-no-repeat bg-transparent dark:bg-transparent w-full h-[80px] z-[80] border-y-[1.5px] border-[var(--darkline)] dark:border-[var(--darkline)] "
         }`}
       >
         <div className=" py-2 h-full">
@@ -58,13 +58,15 @@ const Navbar = () => {
                 className="text-white mr-4 flex justify-items-center"
               >
                 <Image
-                  src="/logo2.png"
+                  src="/logo1.png"
                   alt="logo"
                   width={600}
                   height={500}
                   className="h-6 w-8"
                 />
-                <h1 className="text-[#5B2C78] font-poppins">Elearning</h1>
+                <h1 className="text-[var(--darker)] dark:text-[var(--white)]font-poppins">
+                  Elearning
+                </h1>
               </Link>
             </div>
             <div className="hidden md:flex items-center gap-4">
@@ -73,8 +75,8 @@ const Navbar = () => {
                   <span
                     className={`${
                       item.link === params
-                        ? "text-[#4A1F64] font-semibold dark:text-[#424242]"
-                        : "text-[#424242] dark:text-green-500"
+                        ? "text-[var(--darkline)] font-semibold dark:text-[var(--darkline)]"
+                        : "text-[#424242] dark:text-white hover:text-[var(--darkline)]  hover:font-semibold hover:transition hover:duration-600 dark:hover:text-[var(--darkline)]  "
                     }`}
                   >
                     {item.name}
@@ -105,29 +107,28 @@ const Navbar = () => {
             <div className="flex items-center gap-6">
               <ThemeSwitcher />
 
-              <IoNotificationsOutline className="text-[#4A1F64] text-2xl" />
+              <IoNotificationsOutline className="text-[#070607] text-2xl  dark:text-white dark:hover:text-[var(--darkline)]  dark:hover:font-semibold dark:hover:transition dark:hover:duration-600" />
 
-              {
-                user  && (
-                  <Link href={'/profile'}>
-                    <Image src={user?.avatar?.url || '/user.png'} alt="user" width={100} height={100} className="rounded-full h-8 w-8" />
-                  </Link>
-                )
-              }
+              {user && user.avatar.url && (
+                <Link href={"/profile"}>
+                  <Image
+                    src={user?.avatar?.url || "/user.png"}
+                    alt="user"
+                    width={100}
+                    height={100}
+                    className="rounded-full h-8 w-8"
+                  />
+                </Link>
+              )}
 
-
-              {
-                params !== "/login" && params !== "/signup" && (
-                  (
-                    <Link href="/signup"
-                      className="text-[#ebe8ec] bg-gradient-to-r from-[#4A1F64] to-[#CAADF0] py-2 px-6 rounded-full font-normal"
-                    >
-                      signup
-                    </Link>
-                  )
-                )
-              }
-
+              {params !== "/login" && params !== "/signup" && (
+                <Link
+                  href="/signup"
+                  className="text-[#ebe8ec] bg-gradient-to-r from-[var(--purple)] to-[var(--darkpurple)] py-2 px-6 shadow-md shadow-[var(--darkpurple] rounded-full font-normal"
+                >
+                  signup
+                </Link>
+              )}
             </div>
           </div>
         </div>

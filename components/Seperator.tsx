@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Seperator = () => {
-  return (
-      <div className='h-[2px] bg-[#5B2C78]  my-10 z-[80]'></div>
-  )
-}
+  return <div className="h-[2px] bg-[var(--darkline)]  my-10 z-[80]"></div>;
+};
 
-export default Seperator
+export default Seperator;

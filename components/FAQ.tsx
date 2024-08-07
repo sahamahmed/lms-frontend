@@ -6,18 +6,18 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Image from "next/image";
-
+import "/app.css";
 const FAQ = () => {
   return (
     <div className="">
-      <h1 className="text-5xl text-[#4A1F64] font-normal text-center">
+      <h1 className="text-5xl text-[var(--darker)] font-normal text-center dark:text-[var(--white)]">
         Frequently Asked Questions
       </h1>
       <div className="flex gap-10 justify-between items-start py-2">
         <Accordion
           type="single"
           collapsible
-          className="text-[#4A1F64] w-[80%] text-xl space-y-4 mt-16"
+          className="text-[var(--darkpurple)] dark:text-slate-200 w-[70%] text-xl space-y-4 mt-16"
         >
           <AccordionItem value="item-1">
             <AccordionTrigger className="font-semibold">
@@ -53,10 +53,16 @@ const FAQ = () => {
           </AccordionItem>
         </Accordion>
         <div className="flex items-center flex-col gap-6 ">
-          <Image src="/faq boy.png" alt="" height={1000} width={1000} className="h-44 w-40"/>
+          <Image
+            src="/faq boy.png"
+            alt=""
+            height={1000}
+            width={1000}
+            className="h-44 w-40"
+          />
           <div className="text-center">
             {" "}
-            <h3 className="text-[#4A1F64] text-[30px] font-medium">
+            <h3 className="text-[var(--darkpurple)] text-[30px] font-medium dark:text-[var(--darkline)]">
               Any Question?
             </h3>
             <p className="text-[16px] text-[#AFAEAE]">
@@ -72,7 +78,7 @@ const FAQ = () => {
           </div>
           <button
             type="submit"
-            className=" text-white w-fit px-[20px] rounded-[40px] shadow-md shadow-[#4A1F64] text-[18px] py-2 bg-gradient-to-br from-[#4A1F64] to-[#b792e7]"
+            className=" text-white w-fit px-[20px] rounded-[40px] shadow-md shadow-[var(--darkpurple)] text-[18px] py-2 bg-gradient-to-br from-[var(--purple)] to-[var(--darkpurple)] hover:scale-105 hover:shadow-lg hover:shadow-[var(--darkpurple)]"
           >
             Send
           </button>

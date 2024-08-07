@@ -8,18 +8,18 @@ import { Toaster } from "sonner";
 import AuthProvider from "@/utils/sessionProvider";
 import { FC, ReactNode } from "react";
 import Navbar from "@/components/Navbar";
-
+import "/app.css";
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-Poppins"
-})
+  variable: "--font-Poppins",
+});
 
 const josefin = Josefin_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-Josefin"
-})
+  variable: "--font-Josefin",
+});
 
 export const metadata: Metadata = {
   title: "LMS",
@@ -33,11 +33,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} ${josefin.variable} bg-[#F7F1FF] bg-no-repeat dark:bg-red-950 duration-300`}>
+      <body
+        className={`${poppins.variable} ${josefin.variable} bg-[#F7F1FF] bg-no-repeat dark:bg-[var(--dark-bg)] duration-300`}
+      >
         <Providers>
           <AuthProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-                {children}
+              {children}
               <Toaster position="top-center" richColors />
             </ThemeProvider>
           </AuthProvider>
@@ -46,5 +48,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-
