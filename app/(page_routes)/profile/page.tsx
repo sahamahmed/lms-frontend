@@ -16,6 +16,7 @@ import Link from "next/link";
 import { RiAdminLine } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 import UseProtected from "@/hooks/useProtected";
+import { set } from "zod";
 
 const Page = () => {
   const { user } = useSelector((state: any) => state.auth);
@@ -56,7 +57,7 @@ const Page = () => {
   const logoutHandler = async () => {
     if (data.data !== null) {
       console.log('if ran')
-      await signOut();
+      await signOut().then(() => setLogoutState(true));
     } 
     if (data.data === null) {
       console.log('else ran')

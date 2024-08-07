@@ -22,9 +22,9 @@ const CourseData = ({benefits, setBenefits, setActive, active, prerequisites, se
     setBenefits([...benefits, { title: '' }])
   }
 
-  console.log(benefits)
+//   console.log(benefits)
 
-  console.log(prerequisites)
+//   console.log(prerequisites)
 
   const handlePrerequisiteChange = (index: number, value: any) => {
     prerequisites[index].title = value

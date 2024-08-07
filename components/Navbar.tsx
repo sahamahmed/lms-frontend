@@ -29,6 +29,7 @@ const Navbar = () => {
   const params = usePathname();
 
   const {user} = useSelector((state: any) => state.auth)
+  console.log(user)
 
 
   // if (typeof window !== 'undefined') {
@@ -117,7 +118,7 @@ const Navbar = () => {
 
 
               {
-                params !== "/login" && params !== "/signup" && (
+                params !== "/login" && params !== "/signup" && !user && (
                   (
                     <Link href="/signup"
                       className="text-[#ebe8ec] bg-gradient-to-r from-[#4A1F64] to-[#CAADF0] py-2 px-6 rounded-full font-normal"

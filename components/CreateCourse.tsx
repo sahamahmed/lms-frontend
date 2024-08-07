@@ -9,7 +9,7 @@ import CourseContent from './admin/CourseContent'
 type Props = {}
 
 const CreateCourse = (props: Props) => {
-    const [active, setActive] = React.useState(0)
+    const [active, setActive] = React.useState(2)
     const [courseInfo, setCourseInfo] = React.useState({
         name: '',
         description: '',
@@ -23,12 +23,12 @@ const CreateCourse = (props: Props) => {
     const [benefits, setBenefits] = React.useState([{ title: ''}])
     const [prerequisites, setPrerequisites] = React.useState([{ title: ''}])
     const [courseContentData, setCourseContentData] = React.useState([{ 
-        title: '',
-        description: '',
-        videoUrl: '',
+        title: '.',
+        description: '.',
+        videoUrl: '.',
         videoSection: 'Untitled Section',
-        links: [{ title: '', url: ''}],
-        suggestions: ''
+        links: [{ title: '.', url: '/'}],
+        suggestions: '.'
 
     }])
 
@@ -39,6 +39,9 @@ const CreateCourse = (props: Props) => {
         console.log(prerequisites)
         console.log(courseContentData)
     }
+
+    console.log(courseContentData)
+
 
   return (
     <div className='w-full flex min-h-screen'>
