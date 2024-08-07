@@ -30,38 +30,40 @@ import { useSelector } from "react-redux";
 import Navbar from "./Navbar";
 import "/app.css";
 const Login = () => {
-  const [login, { data, error, isSuccess }] = useLoginMutation();
-  const router = useRouter();
-  const { data: sessionData } = useSession();
-  console.log(sessionData);
-  const { user } = useSelector((state: any) => state.auth);
-  const [
-    sociallogin,
-    { error: socialError, isSuccess: socialSuccess, data: socialData },
-  ] = useSocialLoginMutation();
+  const [login, { data, error, isSuccess}] = useLoginMutation()
+  const router = useRouter()
+  const {data: sessionData}  = useSession()
+  console.log(sessionData)
+  const {user} = useSelector((state:any) => state.auth)
+  console.log(user)
+  const [sociallogin, { isSuccess: socialSuccess, data:socialData}] = useSocialLoginMutation()
+
+  console.log(socialData)
 
   useEffect(() => {
     const handleSocialLogin = async () => {
       if (!user) {
-        if (sessionData && sessionData.user) {
+        if (sessionData && sessionData?.user) {
           await sociallogin({
             email: sessionData.user.email,
             name: sessionData.user.name,
             avatar: sessionData.user.image,
-          });
+          }).then(() => router.push("/"))
         }
+
       }
     };
 
     handleSocialLogin();
-  }, [sessionData, socialSuccess, user]);
+  }, [sessionData, user, sociallogin, router]);
+
 
   useEffect(() => {
     if (socialSuccess) {
       toast.success(`Welcome ${socialData.user.name}`);
-      router.push("/");
     }
-  }, [socialSuccess, socialData, router]);
+  }, [socialSuccess, socialData])
+
 
   useEffect(() => {
     if (isSuccess) {

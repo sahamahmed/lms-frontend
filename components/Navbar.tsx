@@ -29,7 +29,9 @@ const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
   const params = usePathname();
 
-  const { user } = useSelector((state: any) => state.auth);
+  const {user} = useSelector((state: any) => state.auth)
+  console.log(user)
+
 
   // if (typeof window !== 'undefined') {
   //   window.addEventListener('scroll', () => {
@@ -107,28 +109,29 @@ const Navbar = () => {
             <div className="flex items-center gap-6">
               <ThemeSwitcher />
 
-              <IoNotificationsOutline className="text-[#070607] text-2xl  dark:text-white dark:hover:text-[var(--darkline)]  dark:hover:font-semibold dark:hover:transition dark:hover:duration-600" />
+              <IoNotificationsOutline className="text-[#4A1F64] text-2xl" />
 
-              {user && user.avatar.url && (
-                <Link href={"/profile"}>
-                  <Image
-                    src={user?.avatar?.url || "/user.png"}
-                    alt="user"
-                    width={100}
-                    height={100}
-                    className="rounded-full h-8 w-8"
-                  />
-                </Link>
-              )}
+              {
+                user  && (
+                  <Link href={'/profile'}>
+                    <Image src={user?.avatar?.url || '/user.png'} alt="user" width={100} height={100} className="rounded-full h-8 w-8" />
+                  </Link>
+                )
+              }
 
-              {params !== "/login" && params !== "/signup" && (
-                <Link
-                  href="/signup"
-                  className="text-[#ebe8ec] bg-gradient-to-r from-[var(--purple)] to-[var(--darkpurple)] py-2 px-6 shadow-md shadow-[var(--darkpurple] rounded-full font-normal"
-                >
-                  signup
-                </Link>
-              )}
+
+              {
+                params !== "/login" && params !== "/signup" && !user && (
+                  (
+                    <Link href="/signup"
+                      className="text-[#ebe8ec] bg-gradient-to-r from-[#4A1F64] to-[#CAADF0] py-2 px-6 rounded-full font-normal"
+                    >
+                      signup
+                    </Link>
+                  )
+                )
+              }
+
             </div>
           </div>
         </div>
