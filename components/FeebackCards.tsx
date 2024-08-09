@@ -3,7 +3,7 @@ import React from "react";
 
 const FeedbackCards = () => {
   return (
-    <div className="relative dark:bg-[var(--course-box-dark-mode-clr)] bg-[#FFFF]  shadow-md shadow-[var(--white)] dark:shadow-[var(--darkbg)] h-64 w-[30%] px-10 pt-16 rounded-3xl">
+    <div className="relative dark:bg-[var(--course-box-dark-mode-clr)] bg-[#FFFF]  shadow-md shadow-slate-400 dark:shadow-[var(--darkbg)] h-64 w-[30%] px-10 pt-16 rounded-3xl">
       <div className="absolute top-[-60px] left-[-15px] flex justify-between items-center h-32 w-full  ">
         <div className="bg-[var(--darker)] shadow-md shadow-[var(--white)] dark:shadow-[var(--darker)] font-semibold text-[#FBF3FF] h-16 px-6 pb-2 pt-4 rounded-[30px] dark:bg-[var(--st-name-tag-clr)]">
           Student Name

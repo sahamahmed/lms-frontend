@@ -30,15 +30,16 @@ import { useSelector } from "react-redux";
 import Navbar from "./Navbar";
 import "/app.css";
 const Login = () => {
-  const [login, { data, error, isSuccess}] = useLoginMutation()
-  const router = useRouter()
-  const {data: sessionData}  = useSession()
-  console.log(sessionData)
-  const {user} = useSelector((state:any) => state.auth)
-  console.log(user)
-  const [sociallogin, { isSuccess: socialSuccess, data:socialData}] = useSocialLoginMutation()
+  const [login, { data, error, isSuccess }] = useLoginMutation();
+  const router = useRouter();
+  const { data: sessionData } = useSession();
+  console.log(sessionData);
+  const { user } = useSelector((state: any) => state.auth);
+  console.log(user);
+  const [sociallogin, { isSuccess: socialSuccess, data: socialData }] =
+    useSocialLoginMutation();
 
-  console.log(socialData)
+  console.log(socialData);
 
   useEffect(() => {
     const handleSocialLogin = async () => {
@@ -48,22 +49,19 @@ const Login = () => {
             email: sessionData.user.email,
             name: sessionData.user.name,
             avatar: sessionData.user.image,
-          }).then(() => router.push("/"))
+          }).then(() => router.push("/"));
         }
-
       }
     };
 
     handleSocialLogin();
   }, [sessionData, user, sociallogin, router]);
 
-
   useEffect(() => {
     if (socialSuccess) {
       toast.success(`Welcome ${socialData.user.name}`);
     }
-  }, [socialSuccess, socialData])
-
+  }, [socialSuccess, socialData]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -100,7 +98,6 @@ const Login = () => {
     <>
       <div
         style={{
-          backgroundImage: "url(/login.png)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
@@ -108,14 +105,16 @@ const Login = () => {
           height: "100%",
           width: "100%",
         }}
-        className="h-full py-5"
+        className={
+          "h-full py-5 bg-[url(/login.png)] dark:bg-[url(/darkLogin.png)] transition-all duration-1000 ease-out"
+        }
       >
         <div className="px-28 ">
           {" "}
           <Navbar />
         </div>
 
-        <div className="absolute flex gap-y-[21px] flex-col items-center top-[25%] left-[10%] w-[500px]">
+        <div className="absolute flex gap-y-[21px] flex-col items-center top-[25%] left-[13%] w-[420px]">
           <div className="flex flex-col items-center gap-y-[10px]">
             <h1 className="text-[#5B2C78] dark:text-[var(--white)] font-bold text-[57px] z-50 ">
               LOGIN
@@ -128,7 +127,7 @@ const Login = () => {
                   size={40}
                 />
                 <VscGithub
-                  className="border rounded-3xl px-1 py-1 border-gray-400 cursor-pointer"
+                  className="border rounded-3xl px-1 py-1 border-gray-400 cursor-pointer dark:text-gray-200"
                   size={40}
                   onClick={() => signIn("github")}
                 />
@@ -139,7 +138,7 @@ const Login = () => {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="flex flex-col items-center gap-y-[20px] z-20"
+              className="flex w-full flex-col items-center gap-y-[20px] z-20"
             >
               <FormField
                 control={form.control}
@@ -186,7 +185,7 @@ const Login = () => {
               />
               <Button
                 type="submit"
-                className=" text-white hover:scale-105 px-10 shadow-md shadow-[var(--darker)] hover:shadow-lg hover:shadow-[var(--darker)] rounded-[40px] text-[18px] py-[10px] bg-gradient-to-br from-[#5B2C78] to-[#9747FF]"
+                className=" text-white hover:scale-105 px-10 shadow-md shadow-[var(--lighter)] hover:shadow-lg hover:shadow-[var(--darker)] rounded-[40px] text-[18px] py-[10px] bg-gradient-to-br from-[var(--darker)] to-[var(--purple)] dark:shadow-[var(--dark-bg)]"
               >
                 Login
               </Button>
@@ -194,13 +193,15 @@ const Login = () => {
           </Form>
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-y-[21px] absolute top-[32%] right-[5%] w-[500px] z-20 ">
-          <h1 className="text-[57px] font-bold text-[#5B2C78]">New User?</h1>
-          <p className="text-[16px] text-center w-[285px] text-[#5B2C78]">
+        <div className="flex flex-col items-center justify-center gap-y-[21px] absolute top-[32%] right-[5%] w-[500px] z-20">
+          <h1 className="text-[57px] font-bold text-[#5B2C78] dark:text-white">
+            New User?
+          </h1>
+          <p className="text-[16px] text-center w-[285px] text-[#5B2C78] dark:text-white">
             Kindly create an account here and begin your journey.
           </p>
           <Link href={"/signup"}>
-            <button className="px-11 rounded-[40px] font-medium text-[18px] py-[10px] border-2 border-[#5B2C78] text-[#5B2C78] transition duration-1000 ease-in-out hover:bg-gradient-to-br hover:from-[var(--darkpurple)] hover:to-[var(--purple)] hover:border-none hover:scale-105 hover:shadow-lg hover:shadow-[var(--darker)] hover:text-white">
+            <button className="px-11 rounded-[40px] font-medium text-[18px] py-[10px] border-2 border-[#5B2C78] text-[#5B2C78] transition duration-1000 ease-in-out hover:bg-gradient-to-br hover:from-[var(--darkpurple)] hover:to-[var(--purple)] hover:border-none hover:scale-105 hover:shadow-md dark:hover:shadow-[var(--darker)] hover:shadow-[var(--lighter)] hover:text-white dark:text-white dark:border-white dark:hover:bg-gradient-to-br dark:hover:from-[var(--darker] dark:hover:to-[var(--darkline)]">
               Register
             </button>
           </Link>

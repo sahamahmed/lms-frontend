@@ -29,9 +29,8 @@ const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
   const params = usePathname();
 
-  const {user} = useSelector((state: any) => state.auth)
-  console.log(user)
-
+  const { user } = useSelector((state: any) => state.auth);
+  console.log(user);
 
   // if (typeof window !== 'undefined') {
   //   window.addEventListener('scroll', () => {
@@ -54,19 +53,15 @@ const Navbar = () => {
       >
         <div className=" py-2 h-full">
           <div className="flex justify-between items-center h-full">
-            <div className="flex items-center">
+            <div className="flex gap-2 items-center">
               <Link
                 href="#"
                 className="text-white mr-4 flex justify-items-center"
               >
-                <Image
-                  src="/logo1.png"
-                  alt="logo"
-                  width={600}
-                  height={500}
-                  className="h-6 w-8"
-                />
-                <h1 className="text-[var(--darker)] dark:text-[var(--white)]font-poppins">
+                <div className="w-[24px] h-[24px] bg-[url(/logo1.png)] bg-contain bg-center bg-no-repeat dark:bg-[url(/logo2.png)]">
+                  {" "}
+                </div>
+                <h1 className="text-[var(--darker)] dark:text-white font-poppins">
                   Elearning
                 </h1>
               </Link>
@@ -109,29 +104,28 @@ const Navbar = () => {
             <div className="flex items-center gap-6">
               <ThemeSwitcher />
 
-              <IoNotificationsOutline className="text-[#4A1F64] text-2xl" />
+              <IoNotificationsOutline className="text-[#4A1F64] text-2xl dark:text-white dark:hover:text-[var(--darkline)]" />
 
-              {
-                user  && (
-                  <Link href={'/profile'}>
-                    <Image src={user?.avatar?.url || '/user.png'} alt="user" width={100} height={100} className="rounded-full h-8 w-8" />
-                  </Link>
-                )
-              }
+              {user && (
+                <Link href={"/profile"}>
+                  <Image
+                    src={user?.avatar?.url || "/user.png"}
+                    alt="user"
+                    width={100}
+                    height={100}
+                    className="rounded-full h-8 w-8"
+                  />
+                </Link>
+              )}
 
-
-              {
-                params !== "/login" && params !== "/signup" && !user && (
-                  (
-                    <Link href="/signup"
-                      className="text-[#ebe8ec] bg-gradient-to-r from-[#4A1F64] to-[#CAADF0] py-2 px-6 rounded-full font-normal"
-                    >
-                      signup
-                    </Link>
-                  )
-                )
-              }
-
+              {params !== "/login" && params !== "/signup" && !user && (
+                <Link
+                  href="/signup"
+                  className="text-[#ebe8ec] bg-gradient-to-r from-[var(--darkline)] to-[var(--darker)] py-2 px-6 rounded-full font-normal"
+                >
+                  signup
+                </Link>
+              )}
             </div>
           </div>
         </div>

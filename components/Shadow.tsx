@@ -5,20 +5,20 @@ const Shadow = () => {
     <div className="w-full">
       <img
         src="/bg shadow.png"
-        className="absolute w-[800px] right-[-5%] top-[-5%] blur-2xl"
+        className="absolute w-[800px] right-[0%] top-[-5%] blur-2xl"
       />
 
       <img
         src="/bg shadow.png"
-        className="absolute w-full right-[10%] top-[30%] h-[450px] blur-2xl"
+        className="absolute w-[600px] right-[30%] top-[30%] h-[450px] blur-2xl"
       />
       <img
         src="/bg shadow.png"
-        className="absolute w-full right-[10%] top-[42%] h-[450px] blur-2xl"
+        className="absolute w-[600px] right-[30%] top-[42%] h-[450px] blur-2xl"
       />
       <img
         src="/bg shadow.png"
-        className="absolute w-full left-[-10%] top-[62%] h-[350px] blur-2xl"
+        className="absolute w-[800px] left-[15%] top-[62%] h-[350px] blur-2xl"
       />
 
       <img
@@ -27,7 +27,7 @@ const Shadow = () => {
       />
       <img
         src="/bg shadow.png"
-        className="absolute w-full right-[-90%] top-[80%] h-[450px] blur-2xl"
+        className="absolute w-[100px] right-[0%] top-[78%] h-[450px] blur-2xl"
       />
     </div>
   );

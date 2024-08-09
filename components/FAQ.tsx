@@ -78,7 +78,7 @@ const FAQ = () => {
           </div>
           <button
             type="submit"
-            className=" text-white w-fit px-[20px] rounded-[40px] shadow-md shadow-[var(--darkpurple)] text-[18px] py-2 bg-gradient-to-br from-[var(--purple)] to-[var(--darkpurple)] hover:scale-105 hover:shadow-lg hover:shadow-[var(--darkpurple)]"
+            className=" text-white w-fit px-[20px] rounded-[40px] shadow-md shadow-purple-300 dark:shadow-[var(--darkpurple)] text-[18px] py-2 bg-gradient-to-br from-[var(--purple)] to-[var(--darkpurple)] hover:scale-105 hover:shadow-lg hover:shadow-[var(--darkpurple)]"
           >
             Send
           </button>

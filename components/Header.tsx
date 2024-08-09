@@ -25,7 +25,7 @@ const Header = () => {
               <div className="my-8">
                 <Link
                   href={"/courses"}
-                  className="text-[#ebe8ec] bg-gradient-to-tl from-[var(--purple)] to-[var(--darkpurple)] py-2 px-6 rounded-full font-normal mt-8 border border-purple-800 shadow-lg shadow-purple-200 hover:scale-105  hover:shadow-purple-300 dark:hover:shadow-xl dark:shadow-[var(--darkbg)] "
+                  className="text-[#ebe8ec] bg-gradient-to-tl from-[var(--purple)] to-[var(--darkpurple)] py-2 px-6 rounded-full font-normal mt-8 border border-purple-950 shadow-lg shadow-purple-200 hover:scale-105  hover:shadow-purple-300 dark:hover:shadow-xl dark:shadow-[var(--darkbg)] "
                 >
                   Start Learning
                 </Link>
