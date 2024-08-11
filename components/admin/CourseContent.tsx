@@ -219,6 +219,16 @@ const CourseContent = ({ active, setActive, courseContentData, setCourseContentD
                   />
                 </label>
                 <label className='block mb-2'>
+                  Video Length (in minutes):
+                  <input
+                    type="text"
+                    value={section.videoLength}
+                    onChange={(e) => handleInputChange(index, 'videoLength', e.target.value)}
+                    className='w-full bg-transparent border border-gray-300 outline-none mt-1'
+                    placeholder='20'
+                  />
+                </label>
+                <label className='block mb-2'>
                   Suggestions:
                   <textarea
                     value={section.suggestions}

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useGetLayoutQuery } from '@/redux/features/layout/layoutApi'
+import React, { useEffect, useState } from 'react'
 
 type Props = {
     courseInfo: any
@@ -10,6 +11,15 @@ type Props = {
 const CourseInformation = ({courseInfo, setActive, setCourseInfo, active}: Props) => {
 
     const [dragging, setDragging] = useState(false)
+    const [categories, setCategories] = useState([])
+    const { data } = useGetLayoutQuery('Category');
+
+    useEffect(()=> {
+        if(data) {
+            setCategories(data?.layout?.categories)
+        }
+    }, [data])
+
 
     const handleSubmission = (e: any) => {
         e.preventDefault()
@@ -130,17 +140,32 @@ const CourseInformation = ({courseInfo, setActive, setCourseInfo, active}: Props
                           />
                       </div>
                 </div>
-                <div className='flex flex-col gap-4 mt-4'>
-                    <label htmlFor='demoUrl' className='text-lg'>Course Demo URL</label>
-                    <input 
-                        type='text' 
-                        id='demoUrl' 
-                        placeholder='Enter course demo URL' 
-                        value={courseInfo.demoUrl}
-                        onChange={(e) => setCourseInfo({...courseInfo, demoUrl: e.target.value})}
-                        className='border border-gray-300 rounded-md p-2'
-                    />
-                </div>
+               <div className='flex justify-between'>
+                        <div className='flex flex-col gap-4 mt-4'>
+                            <label htmlFor='categories' className='text-lg'>Course Categories</label>
+                            <select name="" id="" value={courseInfo.categories} onChange={
+                                (e) => setCourseInfo({ ...courseInfo, categories: e.target.value })
+                            } >
+                                <option value="">Select Category</option>
+                                {
+                                    categories.map((category: any) => (
+                                        <option key={category._id} value={category._id}>{category.title}</option>
+                                    ))
+                                }
+                            </select>
+                        </div>
+                      <div className='flex flex-col gap-4 mt-4'>
+                          <label htmlFor='demoUrl' className='text-lg'>Course Demo URL</label>
+                          <input
+                              type='text'
+                              id='demoUrl'
+                              placeholder='Enter course demo URL'
+                              value={courseInfo.demoUrl}
+                              onChange={(e) => setCourseInfo({ ...courseInfo, demoUrl: e.target.value })}
+                              className='border border-gray-300 rounded-md p-2'
+                          />
+                      </div>
+               </div>
 
 
                   <div className='flex flex-col gap-4 mt-4'>

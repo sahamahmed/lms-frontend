@@ -23,6 +23,7 @@ const CreateCourse = (props: Props) => {
         name: '',
         description: '',
         price: '',
+        categories: '',
         estimatedPrice: '',
         tags: '',
         level: '',
@@ -36,6 +37,7 @@ const CreateCourse = (props: Props) => {
         description: '',
         videoUrl: '',
         videoSection: 'Untitled Section',
+        videoLength: "",
         links: [{ title: '', url: ''}],
         suggestions: ''
 
@@ -64,6 +66,7 @@ const CreateCourse = (props: Props) => {
             description: section.description,
             videoUrl: section.videoUrl,
             videoSection: section.videoSection,
+            videoLength: section.videoLength,
             links: section.links.map((link) => ({title: link.title, url: link.url})),
             suggestions: section.suggestions
         }))
@@ -73,6 +76,7 @@ const CreateCourse = (props: Props) => {
         const data = {
             name: courseInfo.name,
             description: courseInfo.description,
+            categories: courseInfo.categories,
             price: courseInfo.price,
             estimatedPrice: courseInfo.estimatedPrice,
             tags: courseInfo.tags,
