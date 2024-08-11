@@ -6,10 +6,11 @@ type Props = {
     setActive: (active: number) => void
     courseData: any
     handleCourseCreate: any
+    edit: boolean
 }
 
 const CoursePreview = ({
-    active, setActive, courseData, handleCourseCreate
+    active, setActive, courseData, handleCourseCreate , edit
 }: Props) => {
     console.log(courseData)
   return (
@@ -97,7 +98,7 @@ const CoursePreview = ({
                         }
                       className='bg-[#4A1F64] w-[25%] text-white px-4 py-2 rounded-md'
                   >
-                      Create
+                      {edit? 'Update' : 'Create'}
                   </button>
               </div>
         </div>

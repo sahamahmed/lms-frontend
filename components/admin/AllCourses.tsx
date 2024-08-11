@@ -16,6 +16,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { toast } from 'sonner';
+import Link from 'next/link';
 
 
 
@@ -73,10 +74,10 @@ export default function AllCourses() {
             field: 'edit',
             headerName: 'Edit',
             flex: 0.5,
-            renderCell: () => (
-                <div className="flex justify-center items-center w-full h-full">
+            renderCell: (params) => (
+                <Link href={`/admin/edit-course/${params.row.id}`} className="flex justify-center items-center w-full h-full">
                     <MdEdit size={20} className="text-blue-600" />
-                </div>
+                </Link>
             ),
         },
         {

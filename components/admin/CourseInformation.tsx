@@ -168,7 +168,7 @@ const CourseInformation = ({courseInfo, setActive, setCourseInfo, active}: Props
                       </div>
                       {
                           courseInfo.thumbnail && (
-                              <img src={courseInfo.thumbnail} alt='thumbnail' className='mt-12' />
+                              <img src={courseInfo.thumbnail.url || courseInfo.thumbnail } alt='thumbnail' className='mt-12' />
                           )
                       }
                   </ div>

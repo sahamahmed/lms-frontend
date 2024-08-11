@@ -1,3 +1,4 @@
+import { get } from "http";
 import { apiSlice } from "../api/apiSlice";
 
 
@@ -25,9 +26,26 @@ export const courseSlice = apiSlice.injectEndpoints({
                 method: 'DELETE',
                 credentials: 'include' as const,
             })
-        })
+        }),
+
+        getFullCourse: builder.query({
+            query: ({id}) => ({
+                url: `get-course-content/${id}`,
+                method: 'GET',
+                credentials: 'include' as const,
+            })
+        }),
+
+        editCourse: builder.mutation({
+            query: ({id, data}) => ({
+                url: `edit-course/${id}`,
+                method: 'PUT',
+                body: data,
+                credentials: 'include' as const,
+            })
+        }),
     }),
 })
 
 
-export const {useCreateCourseMutation , useGetAllCoursesQuery , useDeleteCourseMutation} = courseSlice;
+export const {useCreateCourseMutation , useGetAllCoursesQuery , useDeleteCourseMutation, useGetFullCourseQuery, useEditCourseMutation} = courseSlice;

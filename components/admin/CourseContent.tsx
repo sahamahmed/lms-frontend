@@ -41,16 +41,44 @@ const CourseContent = ({ active, setActive, courseContentData, setCourseContentD
   }
 
   const handleInputChange = (sectionIndex: number, field: string, value: string) => {
-    const updatedData = [...courseContentData]
-    updatedData[sectionIndex][field] = value
-    setCourseContentData(updatedData)
-  }
+    const updatedData = courseContentData.map((section: any, index: number) => {
+      if (index === sectionIndex) {
+        // Return a new object with the updated field
+        return {
+          ...section,
+          [field]: value
+        };
+      }
+      return section;
+    });
+    setCourseContentData(updatedData);
+  };
+
 
   const handleLinkChange = (sectionIndex: number, linkIndex: number, field: string, value: string) => {
-    const updatedData = [...courseContentData]
-    updatedData[sectionIndex].links[linkIndex][field] = value
-    setCourseContentData(updatedData)
-  }
+    const updatedData = courseContentData.map((section: any, index: number) => {
+      if (index === sectionIndex) {
+        const updatedLinks = section.links.map((link: any, lIndex: number) => {
+          if (lIndex === linkIndex) {
+            return {
+              ...link,
+              [field]: value,
+            };
+          }
+          return link;
+        });
+
+        return {
+          ...section,
+          links: updatedLinks,
+        };
+      }
+      return section;
+    });
+
+    setCourseContentData(updatedData);
+  };
+
 
  
 
