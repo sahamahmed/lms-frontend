@@ -32,6 +32,7 @@ import ThemeSwitcher from '@/utils/theme-switcher';
 import { IoNotificationsOutline } from 'react-icons/io5';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
+import { usePathname } from 'next/navigation';
 
 const drawerWidth = 230;
 
@@ -39,6 +40,7 @@ const AdminSideBar = () => {
     const {user} = useSelector((state: any) => state.auth)
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [isClosing, setIsClosing] = React.useState(false);
+    const pathname = usePathname()
 
     const handleDrawerClose = () => {
         setIsClosing(true);
@@ -78,7 +80,7 @@ const AdminSideBar = () => {
                     { text: "Users", href: "/admin/users", icon: <GroupIcon /> },
                     { text: "Invoices", href: "/admin/invoices", icon: <ReceiptIcon /> },
                 ].map((item, index) => (
-                    <ListItem key={index} disablePadding>
+                    <ListItem key={index} disablePadding className={pathname === item.href ? 'bg-blue-500 text-white' : ''}>
                         <ListItemButton>
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <Link href={item.href}>
@@ -96,7 +98,7 @@ const AdminSideBar = () => {
                     { text: "Create Course", href: "/admin/create-course", icon: <CreateIcon /> },
                     { text: "Live Courses", href: "/admin/courses", icon: <LiveTvIcon /> },
                 ].map((item, index) => (
-                    <ListItem key={index} disablePadding>
+                    <ListItem key={index} disablePadding className={pathname === item.href ? 'bg-blue-500 text-white' : ''}>
                         <ListItemButton>
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <Link href={item.href}>
@@ -115,7 +117,7 @@ const AdminSideBar = () => {
                     { text: "FAQ", href: "/admin/faq", icon: <StarIcon /> },
                     { text: "Categories", href: "/admin/categories", icon: <CategoryIcon /> },
                 ].map((item, index) => (
-                    <ListItem key={index} disablePadding>
+                    <ListItem key={index} disablePadding className={pathname === item.href ? 'bg-blue-500 text-white' : ''}>
                         <ListItemButton>
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <Link href={item.href}>
@@ -134,7 +136,7 @@ const AdminSideBar = () => {
                 {[
                     { text: "Manage Team", href: "/admin/team", icon: <GroupIcon /> },
                 ].map((item, index) => (
-                    <ListItem key={index} disablePadding>
+                    <ListItem key={index} disablePadding className={pathname === item.href ? 'bg-blue-500 text-white' : ''}>
                         <ListItemButton>
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <Link href={item.href}>
@@ -154,7 +156,7 @@ const AdminSideBar = () => {
                     { text: "User Analytics", href: "/admin/courses-analytics", icon: <RiOrderPlayFill /> }
 
                 ].map((item, index) => (
-                    <ListItem key={index} disablePadding>
+                    <ListItem key={index} disablePadding className={pathname === item.href ? 'bg-blue-500 text-white' : ''}>
                         <ListItemButton>
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <Link href={item.href}>
@@ -172,7 +174,7 @@ const AdminSideBar = () => {
                     { text: "Settings", href: "/admin/settings", icon: <VideoSettingsIcon /> },
                     { text: "Logout", href: "/admin/logout", icon: <HistoryIcon /> },
                 ].map((item, index) => (
-                    <ListItem key={index} disablePadding>
+                    <ListItem key={index} disablePadding className={pathname === item.href ? 'bg-blue-500 text-white' : ''}>
                         <ListItemButton>
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <Link href={item.href}>
