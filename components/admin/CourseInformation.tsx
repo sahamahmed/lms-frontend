@@ -175,7 +175,7 @@ const CourseInformation = ({courseInfo, setActive, setCourseInfo, active}: Props
 
 
 
-                <div className='mt-8 flex justify-end'>
+                <div className='mt-16 flex justify-end'>
                     <button 
                         type='submit' 
                           className='bg-[#4A1F64] w-[25%] text-white px-4 py-2 rounded-md'

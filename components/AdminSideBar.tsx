@@ -33,7 +33,7 @@ import { IoNotificationsOutline } from 'react-icons/io5';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 
-const drawerWidth = 250;
+const drawerWidth = 230;
 
 const AdminSideBar = () => {
     const {user} = useSelector((state: any) => state.auth)
@@ -56,8 +56,8 @@ const AdminSideBar = () => {
     };
 
     const drawer = (
-        <div className='text-white bg-slate-900 '>
-            <Toolbar className="bg-slate-900 m-0 px-4 text-white text-2xl font-semibold">
+        <div className='dark:text-white dark:bg-slate-900 bg-[#bfcbd3] text-slate-900 '>
+            <Toolbar className=" m-0 px-4 text-2xl font-semibold">
                 E Learning
             </Toolbar>
             <Divider className="bg-white m-0 p-0" />
@@ -66,7 +66,7 @@ const AdminSideBar = () => {
                 <ListItem disablePadding className='w-full'>
                         <div className='flex flex-col gap-1 justify-center items-center w-full mt-2'>
                             <ListItemIcon><Image height={200} width={200} src={user?.avatar?.url || '/user.png' } alt="Admin Icon" className='w-24 h-24 rounded-full' /></ListItemIcon>
-                            <ListItemText primary="user" />
+                            <ListItemText primary={user?.name} />
                             <ListItemText primary="~ Admin" />
                         </div>
                 </ListItem>
@@ -94,7 +94,7 @@ const AdminSideBar = () => {
             <List className="">
                 {[
                     { text: "Create Course", href: "/admin/create-course", icon: <CreateIcon /> },
-                    { text: "Live Courses", href: "/admin/live-courses", icon: <LiveTvIcon /> },
+                    { text: "Live Courses", href: "/admin/courses", icon: <LiveTvIcon /> },
                 ].map((item, index) => (
                     <ListItem key={index} disablePadding>
                         <ListItemButton>
@@ -132,7 +132,7 @@ const AdminSideBar = () => {
 
             <List className="">
                 {[
-                    { text: "Manage Team", href: "/admin/manage-team", icon: <GroupIcon /> },
+                    { text: "Manage Team", href: "/admin/team", icon: <GroupIcon /> },
                 ].map((item, index) => (
                     <ListItem key={index} disablePadding>
                         <ListItemButton>
@@ -197,10 +197,10 @@ const AdminSideBar = () => {
                     ml: { sm: `${drawerWidth}px` },
                 }}
             >
-                <Toolbar className="bg-[#bfcbd3]  ">
+                <Toolbar className="bg-[#bfcbd3] dark:bg-slate-900  ">
                     <div className="flex items-center justify-end gap-4 w-full mx-auto mr-8">
                         <ThemeSwitcher />
-                        <IoNotificationsOutline className="text-[#4A1F64] text-2xl" />
+                        <IoNotificationsOutline className="dark:text-white text-2xl" />
                     </div>
                 </Toolbar>
             </AppBar>

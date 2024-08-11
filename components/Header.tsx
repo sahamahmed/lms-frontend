@@ -18,14 +18,14 @@ const Header = () => {
                 <span className="text-[var(--darkline)]">Personalized</span>{" "}
                 Learning Paths
               </h1>
-              <p className="text-lg text-[#5B2C78] dark:text-[var(--white)]">
+              <p className="text-lg text-[#5B2C78] dark:text-[var(--white)] mt-4">
                 Study any topic, anytime. Choose from a number of expert-led
                 courses now.
               </p>
               <div className="my-8">
                 <Link
                   href={"/courses"}
-                  className="text-[#ebe8ec] bg-gradient-to-tl from-[var(--purple)] to-[var(--darkpurple)] py-2 px-6 rounded-full font-normal mt-8 border border-purple-950 shadow-lg shadow-purple-200 hover:scale-105  hover:shadow-purple-300 dark:hover:shadow-xl dark:shadow-[var(--darkbg)] "
+                  className="text-[#ebe8ec] py-4 bg-gradient-to-tl from-[var(--purple)] to-[var(--darkpurple)]  px-8 rounded-full font-normal mt-8 border border-purple-950 shadow-lg shadow-purple-200 hover:scale-105  hover:shadow-purple-300 dark:hover:shadow-xl dark:shadow-[var(--darkbg)] "
                 >
                   Start Learning
                 </Link>

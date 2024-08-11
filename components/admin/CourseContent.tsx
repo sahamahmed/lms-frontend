@@ -4,6 +4,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { toast } from 'sonner';
+import { TrashIcon } from 'lucide-react';
+import { IoAddCircleSharp } from 'react-icons/io5';
 
 type Props = {
   active: number
@@ -17,9 +19,7 @@ const CourseContent = ({ active, setActive, courseContentData, setCourseContentD
   const [activeSection, setActiveSection] = React.useState(0)
   const [isCollapsed, setIsCollapsed] = React.useState<boolean[]>(Array(courseContentData.length).fill(false));
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault()
-  }
+  
 
 
   const validateContentData = (): boolean => {
@@ -38,7 +38,6 @@ const CourseContent = ({ active, setActive, courseContentData, setCourseContentD
 
   const handleCollapseToggle = (index: number) => {
     setIsCollapsed(isCollapsed.map((value, i) => i === index ? !value : value))
-    console.log(isCollapsed, index)
   }
 
   const handleInputChange = (sectionIndex: number, field: string, value: string) => {
@@ -114,6 +113,12 @@ const CourseContent = ({ active, setActive, courseContentData, setCourseContentD
     }
   }
 
+  const handleDeleteContentData = (index: number) => {
+    const a = [...courseContentData]
+   const updatedData = a.filter((c:any, i:number) => i !== index )
+    setCourseContentData(updatedData)
+  };
+
   return (
     <div className='w-[80%] ml-8 mt-24 mb-6'>
       {courseContentData.map((section: any, index: number) => (
@@ -136,7 +141,7 @@ const CourseContent = ({ active, setActive, courseContentData, setCourseContentD
 
           </div>
 
-          <div className="flex">
+          <div className="flex justify-between">
             <div className='flex justify-center items-center gap-2'>
               <label className='font-bold '>
                 {index + 1}{'. '}
@@ -150,9 +155,12 @@ const CourseContent = ({ active, setActive, courseContentData, setCourseContentD
               />
             </div>
 
-            <IconButton onClick={() => handleCollapseToggle(index)} className='text-gray-400 '>
-              {isCollapsed[index] ? <ExpandMoreIcon /> : <ExpandLessIcon />}
-            </IconButton>
+            <div className='flex justify-center items-center'>
+              <IconButton onClick={() => handleCollapseToggle(index)} className='text-gray-400 '>
+                {isCollapsed[index] ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+              </IconButton>
+              <TrashIcon onClick={() => handleDeleteContentData(index)} size={24}  className='font-bold cursor-pointer text-red-700 dark:text-red-500'/>
+            </div>
             
           </div>
 
@@ -226,7 +234,35 @@ const CourseContent = ({ active, setActive, courseContentData, setCourseContentD
           )}
         </div>
       ))}
-      <button onClick={handleAddSection}>Add new section</button>
+
+      <div onClick={handleAddSection} className='flex justify-start items-center mt-6 dark:text-white text-slate-900' >
+        <IoAddCircleSharp className='text-[#4A1F64]  cursor-pointer' size={26}  />
+        <button >Add new section</button>
+      </div>
+
+
+      <div className='mt-8 flex justify-between'>
+        <button
+          onClick={() => setActive(active - 1)}
+          className='bg-[#4A1F64] w-[25%] text-white px-4 py-2 rounded-md'
+        >
+          Back
+        </button>
+
+        <button
+          onClick={() => {
+            if (validateContentData()) {
+              setActive(active + 1)
+              handleCourseSubmit()
+            } else {
+              toast.error('Please fill all fields')
+            }
+          }}
+          className='bg-[#4A1F64] w-[25%] text-white px-4 py-2 rounded-md'
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 

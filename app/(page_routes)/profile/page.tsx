@@ -79,7 +79,7 @@ const Page = () => {
   return (
     <>
     <UseProtected>
-      <div className="px-28 py-5 mx-auto w-full flex gap-10 ">
+      <div className=" mx-auto w-full flex gap-10 ">
         <div className="bg-[#4A1F64] min-h-[30rem] w-[25%] rounded-lg flex flex-col pb-4">
           {sections.map((section, index) => (
             <section

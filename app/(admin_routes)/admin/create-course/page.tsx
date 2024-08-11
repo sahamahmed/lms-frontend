@@ -1,5 +1,5 @@
 'use client'
-import CreateCourse from '@/components/CreateCourse'
+import CreateCourse from '@/components/admin/CreateCourse'
 import React from 'react'
 
 type Props = {}

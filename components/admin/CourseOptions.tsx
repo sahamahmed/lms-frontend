@@ -18,7 +18,7 @@ const CourseOptions = ({active, setActive}: Props) => {
         {options.map((option, index) => (
             <div
                 key={index}
-                className={`w-full flex py-5`}
+                className={`w-full flex py-5 text-slate-900 dark:text-white `}
             >
                 <div className={`flex items-center justify-center rounded-full h-[35px] w-[35px] ${active + 1 > index ? "bg-blue-500" : "bg-[#384766]"} relative`}>
                     <IoMdCheckmark className='text-white' />
@@ -29,7 +29,7 @@ const CourseOptions = ({active, setActive}: Props) => {
                     }
                 </div>
                 <h5 className={`pl-3 text-[20px] ${
-                    active === index ? " text-slate-900":""}`}>{option}
+                    active === index ? "font-bold":""}`}>{option}
                     </h5>
 
             </div>
