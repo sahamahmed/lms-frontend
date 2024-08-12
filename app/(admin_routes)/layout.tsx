@@ -14,7 +14,7 @@ export default function RootLayout({
                 <div className="w-[20%]">
                     <AdminSideBar />
                 </div>
-                <div className="w-[80%] ">
+                <div className="w-[80%] mt-24 ">
                     {children}
 
                 </div>

@@ -6,11 +6,7 @@ import React from 'react'
 
 const Page = () => {
   return (
-    <div>
-            <AdminSideBar />
-            <DashboardHero />
-            
-    </div>
+            <DashboardHero />         
   )
 }
 

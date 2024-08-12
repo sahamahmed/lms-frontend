@@ -19,9 +19,6 @@ const EditCategories = (props: Props) => {
     const [categories, setCategories] = useState([{ title: '' }]);
 
 
-
-
-
     const { data, refetch } = useGetLayoutQuery('Category', { refetchOnMountOrArgChange: true });
 
     const [updateLayout, { isSuccess, error }] = useUpdateLayoutMutation();

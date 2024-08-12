@@ -76,7 +76,7 @@ const AdminSideBar = () => {
 
             <List className="">
                 {[
-                    { text: "Dashboard", href: "/admin/dashboard", icon: <DashboardIcon /> },
+                    { text: "Dashboard", href: "/admin", icon: <DashboardIcon /> },
                     { text: "Users", href: "/admin/users", icon: <GroupIcon /> },
                     { text: "Invoices", href: "/admin/invoices", icon: <ReceiptIcon /> },
                 ].map((item, index) => (
@@ -151,9 +151,9 @@ const AdminSideBar = () => {
 
             <List className="">
                 {[
-                    { text: "Courses Analytics", href: "/admin/courses-analytics", icon: <AnalyticsIcon /> },
-                    { text: "Order Analytics", href: "/admin/courses-analytics", icon: <RiOrderPlayFill /> },
-                    { text: "User Analytics", href: "/admin/courses-analytics", icon: <RiOrderPlayFill /> }
+                    { text: "Courses Analytics", href: "/admin/course-analytics", icon: <AnalyticsIcon /> },
+                    { text: "Order Analytics", href: "/admin/order-analytics", icon: <RiOrderPlayFill /> },
+                    { text: "User Analytics", href: "/admin/user-analytics", icon: <RiOrderPlayFill /> }
 
                 ].map((item, index) => (
                     <ListItem key={index} disablePadding className={pathname === item.href ? 'bg-blue-500 text-white' : ''}>
@@ -171,7 +171,6 @@ const AdminSideBar = () => {
 
             <List className="">
                 {[
-                    { text: "Settings", href: "/admin/settings", icon: <VideoSettingsIcon /> },
                     { text: "Logout", href: "/admin/logout", icon: <HistoryIcon /> },
                 ].map((item, index) => (
                     <ListItem key={index} disablePadding className={pathname === item.href ? 'bg-blue-500 text-white' : ''}>
