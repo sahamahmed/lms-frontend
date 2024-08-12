@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import React from 'react';
+import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -20,27 +20,27 @@ import StarIcon from "@mui/icons-material/Star";
 import HistoryIcon from "@mui/icons-material/History";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import VideoSettingsIcon from "@mui/icons-material/VideoSettings";
-import GroupIcon from '@mui/icons-material/Group';
-import ReceiptIcon from '@mui/icons-material/Receipt';
-import CreateIcon from '@mui/icons-material/Create';
-import LiveTvIcon from '@mui/icons-material/LiveTv';
-import CategoryIcon from '@mui/icons-material/Category';
-import AnalyticsIcon from '@mui/icons-material/Analytics';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import { RiOrderPlayFill } from 'react-icons/ri';
-import ThemeSwitcher from '@/utils/theme-switcher';
-import { IoNotificationsOutline } from 'react-icons/io5';
-import Image from 'next/image';
-import { useSelector } from 'react-redux';
-import { usePathname } from 'next/navigation';
-
+import GroupIcon from "@mui/icons-material/Group";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import CreateIcon from "@mui/icons-material/Create";
+import LiveTvIcon from "@mui/icons-material/LiveTv";
+import CategoryIcon from "@mui/icons-material/Category";
+import AnalyticsIcon from "@mui/icons-material/Analytics";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import { RiOrderPlayFill } from "react-icons/ri";
+import ThemeSwitcher from "@/utils/theme-switcher";
+import { IoNotificationsOutline } from "react-icons/io5";
+import Image from "next/image";
+import { useSelector } from "react-redux";
+import { usePathname } from "next/navigation";
+import "/app.css";
 const drawerWidth = 230;
 
 const AdminSideBar = () => {
-    const {user} = useSelector((state: any) => state.auth)
+    const { user } = useSelector((state: any) => state.auth);
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [isClosing, setIsClosing] = React.useState(false);
-    const pathname = usePathname()
+    const pathname = usePathname();
 
     const handleDrawerClose = () => {
         setIsClosing(true);
@@ -58,31 +58,51 @@ const AdminSideBar = () => {
     };
 
     const drawer = (
-        <div className='dark:text-white dark:bg-slate-900 bg-[#bfcbd3] text-slate-900 '>
-            <Toolbar className=" m-0 px-4 text-2xl font-semibold">
-                E Learning
-            </Toolbar>
-            <Divider className="bg-white m-0 p-0" />
+        <div className="dark:text-slate-200 dark:bg-[var(--darkbg)] bg-[var(--lightest)] text-slate-900 ">
+            <Toolbar className=" m-0 px-4 text-2xl font-semibold">E Learning</Toolbar>
+            <Divider className="bg-gray-300 dark:bg-gray-700  m-0 p-0" />
 
             <List className=" m-0 p-0">
-                <ListItem disablePadding className='w-full'>
-                        <div className='flex flex-col gap-1 justify-center items-center w-full mt-2'>
-                            <ListItemIcon><Image height={200} width={200} src={user?.avatar?.url || '/user.png' } alt="Admin Icon" className='w-24 h-24 rounded-full' /></ListItemIcon>
-                            <ListItemText primary={user?.name} />
-                            <ListItemText primary="~ Admin" />
-                        </div>
+                <ListItem disablePadding className="w-full">
+                    <div className="flex flex-col gap-1 justify-center items-center w-full mt-2">
+                        <ListItemIcon>
+                            <Image
+                                height={200}
+                                width={200}
+                                src={user?.avatar?.url || "/user.png"}
+                                alt="Admin Icon"
+                                className="w-24 h-24 rounded-full"
+                            />
+                        </ListItemIcon>
+                        <ListItemText primary={user?.name} />
+                        <ListItemText primary="~ Admin" />
+                    </div>
                 </ListItem>
             </List>
 
             <List className="">
                 {[
-                    { text: "Dashboard", href: "/admin", icon: <DashboardIcon /> },
+                    {
+                        text: "Dashboard",
+                        href: "/admin",
+                        icon: <DashboardIcon />,
+                    },
                     { text: "Users", href: "/admin/users", icon: <GroupIcon /> },
                     { text: "Invoices", href: "/admin/orders", icon: <ReceiptIcon /> },
                 ].map((item, index) => (
-                    <ListItem key={index} disablePadding className={pathname === item.href ? 'bg-blue-500 text-white' : ''}>
+                    <ListItem
+                        key={index}
+                        disablePadding
+                        className={
+                            pathname === item.href
+                                ? "bg-[#7c40b99f]  dark:bg-[#5544666c] text-white"
+                                : ""
+                        }
+                    >
                         <ListItemButton>
-                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemIcon className="dark:text-slate-300">
+                                {item.icon}
+                            </ListItemIcon>
                             <Link href={item.href}>
                                 <ListItemText primary={item.text} />
                             </Link>
@@ -91,16 +111,34 @@ const AdminSideBar = () => {
                 ))}
             </List>
 
-            <Divider className="bg-white m-0 p-0" />
+            <Divider className="bg-gray-300 dark:bg-gray-700  m-0 p-0" />
 
             <List className="">
                 {[
-                    { text: "Create Course", href: "/admin/create-course", icon: <CreateIcon /> },
-                    { text: "Live Courses", href: "/admin/courses", icon: <LiveTvIcon /> },
+                    {
+                        text: "Create Course",
+                        href: "/admin/create-course",
+                        icon: <CreateIcon className=" dark:text-slate-300" />,
+                    },
+                    {
+                        text: "Live Courses",
+                        href: "/admin/courses",
+                        icon: <LiveTvIcon />,
+                    },
                 ].map((item, index) => (
-                    <ListItem key={index} disablePadding className={pathname === item.href ? 'bg-blue-500 text-white' : ''}>
+                    <ListItem
+                        key={index}
+                        disablePadding
+                        className={
+                            pathname === item.href
+                                ? "bg-[#7c40b99f]  dark:bg-[#5544666c] text-white"
+                                : ""
+                        }
+                    >
                         <ListItemButton>
-                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemIcon className="dark:text-slate-300">
+                                {item.icon}
+                            </ListItemIcon>
                             <Link href={item.href}>
                                 <ListItemText primary={item.text} />
                             </Link>
@@ -109,17 +147,31 @@ const AdminSideBar = () => {
                 ))}
             </List>
 
-            <Divider className="bg-white m-0 p-0" />
+            <Divider className="bg-gray-300 dark:bg-gray-700  m-0 p-0" />
 
             <List className="">
                 {[
                     { text: "Hero", href: "/admin/hero", icon: <HomeIcon /> },
                     { text: "FAQ", href: "/admin/faq", icon: <StarIcon /> },
-                    { text: "Categories", href: "/admin/categories", icon: <CategoryIcon /> },
+                    {
+                        text: "Categories",
+                        href: "/admin/categories",
+                        icon: <CategoryIcon />,
+                    },
                 ].map((item, index) => (
-                    <ListItem key={index} disablePadding className={pathname === item.href ? 'bg-blue-500 text-white' : ''}>
+                    <ListItem
+                        key={index}
+                        disablePadding
+                        className={
+                            pathname === item.href
+                                ? "bg-[#7c40b99f]  dark:bg-[#5544666c] text-white"
+                                : ""
+                        }
+                    >
                         <ListItemButton>
-                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemIcon className="dark:text-slate-300">
+                                {item.icon}
+                            </ListItemIcon>
                             <Link href={item.href}>
                                 <ListItemText primary={item.text} />
                             </Link>
@@ -128,17 +180,25 @@ const AdminSideBar = () => {
                 ))}
             </List>
 
-            <Divider className="bg-white m-0 p-0" />
-
-
+            <Divider className="bg-gray-300 dark:bg-gray-700  m-0 p-0" />
 
             <List className="">
                 {[
                     { text: "Manage Team", href: "/admin/team", icon: <GroupIcon /> },
                 ].map((item, index) => (
-                    <ListItem key={index} disablePadding className={pathname === item.href ? 'bg-blue-500 text-white' : ''}>
+                    <ListItem
+                        key={index}
+                        disablePadding
+                        className={
+                            pathname === item.href
+                                ? "bg-[#7c40b99f]  dark:bg-[#5544666c] text-white"
+                                : ""
+                        }
+                    >
                         <ListItemButton>
-                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemIcon className="dark:text-slate-300">
+                                {item.icon}
+                            </ListItemIcon>
                             <Link href={item.href}>
                                 <ListItemText primary={item.text} />
                             </Link>
@@ -147,18 +207,39 @@ const AdminSideBar = () => {
                 ))}
             </List>
 
-            <Divider className="bg-white m-0 p-0" />
+            <Divider className="bg-gray-300 dark:bg-gray-700  m-0 p-0" />
 
             <List className="">
                 {[
-                    { text: "Courses Analytics", href: "/admin/course-analytics", icon: <AnalyticsIcon /> },
-                    { text: "Order Analytics", href: "/admin/order-analytics", icon: <RiOrderPlayFill /> },
-                    { text: "User Analytics", href: "/admin/user-analytics", icon: <RiOrderPlayFill /> }
-
+                    {
+                        text: "Courses Analytics",
+                        href: "/admin/course-analytics",
+                        icon: <AnalyticsIcon />,
+                    },
+                    {
+                        text: "Order Analytics",
+                        href: "/admin/order-analytics",
+                        icon: <RiOrderPlayFill />,
+                    },
+                    {
+                        text: "User Analytics",
+                        href: "/admin/user-analytics",
+                        icon: <RiOrderPlayFill />,
+                    },
                 ].map((item, index) => (
-                    <ListItem key={index} disablePadding className={pathname === item.href ? 'bg-blue-500 text-white' : ''}>
+                    <ListItem
+                        key={index}
+                        disablePadding
+                        className={
+                            pathname === item.href
+                                ? "bg-[#7c40b99f]  dark:bg-[#5544666c] text-white"
+                                : ""
+                        }
+                    >
                         <ListItemButton>
-                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemIcon className="dark:text-slate-300">
+                                {item.icon}
+                            </ListItemIcon>
                             <Link href={item.href}>
                                 <ListItemText primary={item.text} />
                             </Link>
@@ -167,15 +248,25 @@ const AdminSideBar = () => {
                 ))}
             </List>
 
-            <Divider className="bg-white m-0 p-0" />
+            <Divider className="bg-gray-300 dark:bg-gray-700  m-0 p-0" />
 
             <List className="">
                 {[
                     { text: "Logout", href: "/admin/logout", icon: <HistoryIcon /> },
                 ].map((item, index) => (
-                    <ListItem key={index} disablePadding className={pathname === item.href ? 'bg-blue-500 text-white' : ''}>
+                    <ListItem
+                        key={index}
+                        disablePadding
+                        className={
+                            pathname === item.href
+                                ? "bg-[#7c40b99f]  dark:bg-[#5544666c] text-white"
+                                : ""
+                        }
+                    >
                         <ListItemButton>
-                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemIcon className="dark:text-slate-300">
+                                {item.icon}
+                            </ListItemIcon>
                             <Link href={item.href}>
                                 <ListItemText primary={item.text} />
                             </Link>
@@ -183,7 +274,6 @@ const AdminSideBar = () => {
                     </ListItem>
                 ))}
             </List>
-
         </div>
     );
 
@@ -198,10 +288,10 @@ const AdminSideBar = () => {
                     ml: { sm: `${drawerWidth}px` },
                 }}
             >
-                <Toolbar className="bg-[#bfcbd3] dark:bg-slate-900  ">
-                    <div className="flex items-center justify-end gap-4 w-full mx-auto mr-8">
+                <Toolbar className="bg-[var(--lightest)] dark:bg-[var(--darkbg)]  ">
+                    <div className="flex items-center text-[var(--darker)] justify-end gap-4 w-full mx-auto mr-8">
                         <ThemeSwitcher />
-                        <IoNotificationsOutline className="dark:text-white text-2xl" />
+                        <IoNotificationsOutline className="dark:text-slate-300 text-2xl" />
                     </div>
                 </Toolbar>
             </AppBar>
@@ -245,6 +335,6 @@ const AdminSideBar = () => {
             </Box>
         </Box>
     );
-}
+};
 
 export default AdminSideBar;

@@ -23,8 +23,6 @@ const EditFAQ = (props: Props) => {
     const [editingIndex, setEditingIndex] = React.useState<number | null>(null);
 
 
-  
-
     const { data } = useGetLayoutQuery('FAQ');
 
     const [updateLayout, { isSuccess, error }] = useUpdateLayoutMutation();
@@ -53,7 +51,7 @@ const EditFAQ = (props: Props) => {
 
     const handleAddFAQ = ()=> {
         setFaq([...faq, {question: '', answer: ''}])
-        setEditingIndex(faq.length)
+        setEditingIndex(faq.length)  
     }
 
     const handleInputChange = (index: number, field: 'question' | 'answer', value: string) => {
@@ -68,7 +66,7 @@ const EditFAQ = (props: Props) => {
 
 
     return (
-        <div className='w-full py-16 px-5'>
+        <div className='w-full  px-5'>
             <div className=' mt-4 text-slate-400 dark:text-slate-600 font-semibold text-sm '>Click on existing FAQs to edit them</div>
 
             <form onSubmit={handleEdit}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -7,7 +7,20 @@ import {
 } from "@/components/ui/accordion";
 import Image from "next/image";
 import "/app.css";
+import { useGetLayoutQuery } from "@/redux/features/layout/layoutApi";
 const FAQ = () => {
+
+  const [faq, setFaq] = React.useState([{
+    question: '',
+    answer: ''
+  }]);
+  const { data } = useGetLayoutQuery('FAQ');
+
+
+  useEffect(() => {
+    setFaq(data?.layout?.faq);
+  }, [data]);
+
   return (
     <div className="">
       <h1 className="text-5xl text-[var(--darker)] font-normal text-center dark:text-[var(--white)]">
@@ -19,38 +32,20 @@ const FAQ = () => {
           collapsible
           className="text-[var(--darkpurple)] dark:text-slate-200 w-[70%] text-xl space-y-4 mt-16"
         >
-          <AccordionItem value="item-1">
-            <AccordionTrigger className="font-semibold">
-              Is it accessible?
-            </AccordionTrigger>
-            <AccordionContent className="text-lg font-semibold">
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-2">
-            <AccordionTrigger className="font-semibold">
-              Is it accessible?
-            </AccordionTrigger>
-            <AccordionContent className="text-lg font-semibold">
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-3">
-            <AccordionTrigger className="font-semibold">
-              Is it accessible?
-            </AccordionTrigger>
-            <AccordionContent className="text-lg font-semibold">
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-4">
-            <AccordionTrigger className="font-semibold">
-              Is it accessible?
-            </AccordionTrigger>
-            <AccordionContent className="text-lg font-semibold">
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </AccordionContent>
-          </AccordionItem>
+          {
+            faq && faq.map((item:any, index) => (
+              <>
+                <AccordionItem value={`item-${index+1}`} key={index}>
+                  <AccordionTrigger className="font-semibold">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-lg font-semibold">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              </>
+            ))
+          }
         </Accordion>
         <div className="flex items-center flex-col gap-6 ">
           <Image

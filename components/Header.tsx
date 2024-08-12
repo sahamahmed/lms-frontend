@@ -5,7 +5,11 @@ import ThemeSwitcher from "../utils/theme-switcher";
 import Navbar from "./Navbar";
 import Image from "next/image";
 import "/App.css";
+import { useGetLayoutQuery } from "@/redux/features/layout/layoutApi";
 const Header = () => {
+
+  const { data } = useGetLayoutQuery('Banner');
+
   return (
     <div className="space-y-8 min-h-full h-auto">
       <div className="grid grid-cols-12">
@@ -14,13 +18,10 @@ const Header = () => {
             <div className="w-8 h-[200px] bg-gradient-to-br from-[#A581F0] to-[var(--darker)] rounded-lg shadow-xl shadow-[#9776C1]"></div>
             <div className="flex flex-col justify-center gap-2 h-full">
               <h1 className="text-2xl md:text-4xl lg:text-6xl font-semibold font-[josefin] text-[var(--darker)] dark:text-[var(--white)]">
-                Revolutionize Education with{" "}
-                <span className="text-[var(--darkline)]">Personalized</span>{" "}
-                Learning Paths
+               {data?.layout?.banner.title}
               </h1>
               <p className="text-lg text-[#5B2C78] dark:text-[var(--white)] mt-4">
-                Study any topic, anytime. Choose from a number of expert-led
-                courses now.
+                {data?.layout?.banner.subTitle}
               </p>
               <div className="my-8">
                 <Link
@@ -34,7 +35,7 @@ const Header = () => {
           </div>
         </div>
         <Image
-          src={"/computer.png"}
+          src={data?.layout?.banner.image.url}
           alt="hero"
           width={500}
           height={600}
