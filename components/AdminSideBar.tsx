@@ -78,7 +78,7 @@ const AdminSideBar = () => {
                 {[
                     { text: "Dashboard", href: "/admin", icon: <DashboardIcon /> },
                     { text: "Users", href: "/admin/users", icon: <GroupIcon /> },
-                    { text: "Invoices", href: "/admin/invoices", icon: <ReceiptIcon /> },
+                    { text: "Invoices", href: "/admin/orders", icon: <ReceiptIcon /> },
                 ].map((item, index) => (
                     <ListItem key={index} disablePadding className={pathname === item.href ? 'bg-blue-500 text-white' : ''}>
                         <ListItemButton>
