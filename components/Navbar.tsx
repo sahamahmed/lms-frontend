@@ -113,7 +113,7 @@ const Navbar = () => {
                     alt="user"
                     width={100}
                     height={100}
-                    className="rounded-full h-8 w-8"
+                    className="rounded-full border border-slate-700 dark:border-slate-500 h-8 w-8"
                   />
                 </Link>
               )}
