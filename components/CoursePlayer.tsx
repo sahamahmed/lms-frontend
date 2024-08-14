@@ -3,14 +3,13 @@ import React from 'react'
 type Props = {
     videoUrl: string
     title: string
+    classname?: string
 }
 
-const CoursePlayer = ({videoUrl, title}: Props) => {
+const CoursePlayer = ({videoUrl, title, classname}: Props) => {
 
   return (
-    <div>
-      <video src={videoUrl} controls className='h-96 w-full'></video>
-    </div>
+      <video src={videoUrl} controls className={`${classname}`}></video>
   )
   
 }
