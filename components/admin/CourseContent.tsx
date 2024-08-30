@@ -158,8 +158,8 @@ const CourseContent = ({ active, setActive, courseContentData, setCourseContentD
             <div
               className={` ${courseContentData[index - 1]?.videoSection ===
                   section.videoSection
-                  ? "hidden"
-                  : "flex gap-x-4 items-center"
+                  ? "hidden w-full"
+                  : "flex gap-x-4 items-center w-full"
                 }`}
             >
               <label className="text-lg dark:text-white font-bold">

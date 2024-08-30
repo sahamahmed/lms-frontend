@@ -183,7 +183,7 @@ const CourseInformation = ({
                             >
                                 <option value="">Select Category</option>
                                 {categories.map((category: any) => (
-                                    <option key={category._id} value={category._id}>
+                                    <option key={category._id} value={category.title}>
                                         {category.title}
                                     </option>
                                 ))}

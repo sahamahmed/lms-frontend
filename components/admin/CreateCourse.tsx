@@ -57,6 +57,7 @@ const CreateCourse = (props: Props) => {
         }
     }, [isSuccess, error, isLoading])
 
+    console.log(courseInfo)
 
     const handleSubmit = () => {
         const formattedBenefits = benefits.map((benefit) => ({title : benefit.title}))

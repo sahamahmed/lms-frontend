@@ -18,7 +18,7 @@ const CourseCard = ({course}: any) => {
       <Card className=" px-4 pt-4 pb-2 shadow-md shadow-purple-200 dark:shadow-[var(--darkbg)] cursor-pointer scale-100 hover:scale-105 opacity-100 h-[22rem] rounded-xl border-slate-300 dark:border-none relativetransition ease-out duration-500 hover:shadow-lg ">
         <div className="relative w-full h-[55%] rounded border border-slate-500">
           <Image
-            src={course?.thumbnail?.url ||"/" }
+            src={course?.thumbnail?.url ||"/computer.png" }
             alt="thumbnail"
             width={300}
             height={200}
@@ -48,8 +48,8 @@ const CourseCard = ({course}: any) => {
             </CardDescription>
           </div>
 
-          <CardFooter className="flex flex-row justify-between items-center p-0 ">
-            <p>{course?.price}</p>
+          <CardFooter className="flex flex-row justify-between items-center p-0 mt-2">
+            <p>${course?.price}</p>
             <p className="flex flex-row gap-x-1 justify-end items-center">
               <TfiMenuAlt className="" /> 55 Lectures
             </p>

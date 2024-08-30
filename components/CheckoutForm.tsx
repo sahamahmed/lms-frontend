@@ -18,6 +18,7 @@ const CheckoutForm = ({ data, setOpen }: Props) => {
     const [createOrder, { data: orderData, error: orderError }] = useCreateOrderMutation()
     const [loadUser, setLoadUser] = React.useState<boolean>(false)
     const { } = useLoadUserQuery({ skip: loadUser ? false : true })
+    const router = useRouter()
 
     // State for new fields
     // const [customerName, setCustomerName] = React.useState<string>('')
@@ -49,10 +50,10 @@ const CheckoutForm = ({ data, setOpen }: Props) => {
                 courseId: data.course._id,
                 paymentInfo: paymentIntent,
             })
+            router.refresh()
         }
     }
 
-    const router = useRouter()
 
 
     useEffect(() => {

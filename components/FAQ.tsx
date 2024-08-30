@@ -1,28 +1,29 @@
 import React, { useEffect } from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Image from "next/image";
 import "/app.css";
 import { useGetLayoutQuery } from "@/redux/features/layout/layoutApi";
-const FAQ = () => {
+import { useInView } from 'react-intersection-observer';
+import { useSpring, animated } from 'react-spring';
 
-  const [faq, setFaq] = React.useState([{
-    question: '',
-    answer: ''
-  }]);
+const FAQ = () => {
+  const [faq, setFaq] = React.useState([{ question: '', answer: '' }]);
   const { data } = useGetLayoutQuery('FAQ');
 
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+
+  const animationProps = useSpring({
+    opacity: inView ? 1 : 0,
+    transform: inView ? 'translateY(0)' : 'translateY(50px)',
+    config: { tension: 170, friction: 70 },
+  });
 
   useEffect(() => {
     setFaq(data?.layout?.faq);
   }, [data]);
 
   return (
-    <div className="">
+    <animated.div className="" ref={ref} style={animationProps}>
       <h1 className="text-5xl text-[var(--darker)] font-normal text-center dark:text-[var(--white)]">
         Frequently Asked Questions
       </h1>
@@ -32,20 +33,18 @@ const FAQ = () => {
           collapsible
           className="text-[var(--darkpurple)] dark:text-slate-200 w-[70%] text-xl space-y-4 mt-16"
         >
-          {
-            faq && faq.map((item:any, index) => (
-              <>
-                <AccordionItem value={`item-${index+1}`} key={index}>
-                  <AccordionTrigger className="font-semibold">
-                    {item.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-lg font-semibold">
-                    {item.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              </>
-            ))
-          }
+          {faq && faq.map((item: any, index) => (
+            <div key={index}>
+              <AccordionItem value={`item-${index + 1}`}>
+                <AccordionTrigger className="font-semibold">
+                  {item.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-lg font-semibold">
+                  {item.answer}
+                </AccordionContent>
+              </AccordionItem>
+            </div>
+          ))}
         </Accordion>
         <div className="flex items-center flex-col gap-6 ">
           <Image
@@ -56,7 +55,6 @@ const FAQ = () => {
             className="h-44 w-40"
           />
           <div className="text-center">
-            {" "}
             <h3 className="text-[var(--darkpurple)] text-[30px] font-medium dark:text-[var(--darkline)]">
               Any Question?
             </h3>
@@ -79,7 +77,7 @@ const FAQ = () => {
           </button>
         </div>
       </div>
-    </div>
+    </animated.div>
   );
 };
 

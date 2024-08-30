@@ -68,8 +68,43 @@ export const courseSlice = apiSlice.injectEndpoints({
                 credentials: 'include' as const,
             })
         }),
+
+        addNewQuestion: builder.mutation({
+            query: ({question , courseId, contentId}) => ({
+                url: 'add-question',
+                method: 'PUT',
+                body: {question, courseId, contentId},
+                credentials: 'include' as const,
+            })
+        }),
+        addAnswerToQuestion: builder.mutation({
+            query: ({ questionId, answer, courseId, contentId }) => ({
+                url: 'add-answer',
+                method: 'PUT',
+                body: { questionId, answer, courseId, contentId },
+                credentials: 'include' as const,
+        }),
+    }),
+
+        addNewReview: builder.mutation({
+            query: ({review, rating, courseId}) => ({
+                url: `add-review/${courseId}`,
+                method: 'PUT',
+                body: {review, rating},
+                credentials: 'include' as const,
+            })
+        }),
+
+        addReviewReply: builder.mutation({
+            query: ({ reviewId, comment, courseId }) => ({
+                url: `add-reply`,
+                method: 'PUT',
+                body: { reviewId, comment, courseId },
+                credentials: 'include' as const,
+            })
+        }),
     }),
 })
 
 
-export const { useGetCourseContentQuery, useCreateCourseMutation , useGetCourseDetailsQuery, useGetAllCoursesQuery , useDeleteCourseMutation, useGetFullCourseQuery, useEditCourseMutation, useGetCoursesQuery} = courseSlice;
+export const {useAddReviewReplyMutation, useAddNewReviewMutation ,useAddAnswerToQuestionMutation, useAddNewQuestionMutation, useGetCourseContentQuery, useCreateCourseMutation , useGetCourseDetailsQuery, useGetAllCoursesQuery , useDeleteCourseMutation, useGetFullCourseQuery, useEditCourseMutation, useGetCoursesQuery} = courseSlice;

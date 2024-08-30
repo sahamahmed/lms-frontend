@@ -6,8 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
-import { Dice1 } from "lucide-react";
-import "/App.css";
+// import "/App.css";
 
 const navItems = [
   {
