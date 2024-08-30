@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import AllOrders from '@/components/admin/AllOrders'
-import React from 'react'
+import AllOrders from "@/components/admin/AllOrders";
+import React from "react";
 
 const Page = () => {
   return (
-    <div className="mt-24">
+    <div className="">
       <AllOrders />
     </div>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
