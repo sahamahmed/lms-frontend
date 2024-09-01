@@ -9,6 +9,7 @@ import { useSpring, animated } from 'react-spring';
 const FAQ = () => {
   const [faq, setFaq] = React.useState([{ question: '', answer: '' }]);
   const { data } = useGetLayoutQuery('FAQ');
+  const [input, setInput] = React.useState('');
 
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
@@ -46,7 +47,7 @@ const FAQ = () => {
             </div>
           ))}
         </Accordion>
-        <div className="flex items-center flex-col gap-6 ">
+        <div className="flex items-center flex-col gap-6 text-black dark:text-white">
           <Image
             src="/faq boy.png"
             alt=""
@@ -59,18 +60,23 @@ const FAQ = () => {
               Any Question?
             </h3>
             <p className="text-[16px] text-[#AFAEAE]">
-              You can ask anything you want to know.
+              You can ask your queries.
             </p>
           </div>
           <div className="w-full">
             <input
               type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
               placeholder="Enter Here.."
               className="px-4 w-full py-2 rounded-3xl border border-gray-400 bg-transparent"
             />
           </div>
           <button
             type="submit"
+            onClick={() => {
+              setInput('');
+            }}
             className=" text-white w-fit px-[20px] rounded-[40px] shadow-md shadow-purple-300 dark:shadow-[var(--darkpurple)] text-[18px] py-2 bg-gradient-to-br from-[var(--purple)] to-[var(--darkpurple)] hover:scale-105 hover:shadow-lg hover:shadow-[var(--darkpurple)]"
           >
             Send

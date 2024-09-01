@@ -7,6 +7,7 @@ import { useAddAnswerToQuestionMutation, useAddNewQuestionMutation, useAddNewRev
 import CommentReply from './CommentReply'
 import { format } from 'timeago.js'
 import { MdVerified } from 'react-icons/md'
+import { getSocket } from '@/utils/socket'
 
 type Props = {
     data: any
@@ -38,10 +39,12 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user , refe
 
     const isReviewExists = courseData?.course?.reviews?.find((review: any) => review.user._id === user?._id)
 
+    const socket = getSocket()
+
     const handleSubmit = () => {
         if (question.length < 1) {
             toast.error('Question cannot be empty');
-        } else if (activeVideo !== undefined) {  // Check if activeVideo is defined
+        } else if (activeVideo !== undefined) {  
             addNewQuestion({ question, courseId: id, contentId: data[activeVideo]?._id });
         }
     }
@@ -81,6 +84,11 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user , refe
             setquestion('')
             toast.success('Question submitted successfully')
             refetch()
+            socket.emit("notification", {
+                title: "New Question",
+                message: `You have a new question from ${data[activeVideo]?.title}`,
+                userId: user._id
+            });
         } else if (error) {
             toast.error('Failed to submit question')
         }
@@ -88,6 +96,13 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user , refe
             setAnswer('')
             toast.success('Answer submitted successfully')
             refetch()
+            if (user.role !== 'admin') {
+                socket.emit("notification", {
+                    title: "New Reply Recieved",
+                    message: `You have a new question reply in ${data[activeVideo]?.title}`,
+                    userId: user._id
+                });
+            }
         } else if (AnswerError) {
             toast.error('Failed to submit answer')
         } 
@@ -97,6 +112,11 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user , refe
             setRating(0)
             toast.success('Review submitted successfully')
             courseRefetch()      
+            socket.emit("notification", {
+                title: "New Review",
+                message: `You have a new review from ${data[activeVideo]?.title}`,
+                userId: user._id
+            });
         } else if (ReviewError) {
             toast.error('Failed to submit review')
         }
@@ -110,9 +130,7 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user , refe
         }
     }, [isSuccess, error, AnswerSuccess, AnswerError, ReviewSuccess, ReviewError, ReviewReplySuccess, ReviewReplyError])
 
-    if (activeVideo !== undefined && data) {
-        console.log('####################',data[activeVideo]?.videoUrl)      
-    }
+
 
     
     return (

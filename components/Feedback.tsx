@@ -21,12 +21,13 @@ const Feedback = () => {
         Student Feedback
       </h1>
       <div className="flex flex-wrap gap-x-6 gap-y-[60px]">
-        <FeedbackCards />
-        <FeedbackCards />
-        <FeedbackCards />
-        <FeedbackCards />
-        <FeedbackCards />
-        <FeedbackCards />
+        <FeedbackCards image={'user.png'} name={'Brian'} description={"The platform is user-friendly, making it easy to navigate through different courses and resources."} />
+        <FeedbackCards image={'person2.png'} name={'Sarah'} description={"I find the variety of courses available to be impressive, catering to different interests and skill levels."} />
+        <FeedbackCards image={'user.png'} name={'Ahmed'} description={"The support and feedback provided during the courses have been very helpful in my learning journey."} />
+        <FeedbackCards image={'person3.jpg'} name={'Ali'} description={"The platforms layout and design contribute to a smooth and enjoyable learning experience."} />
+        <FeedbackCards image={'user.png'} name={'Shahzaib'} description={"Very good experience. Quality content throughout."} />
+        <FeedbackCards image={'user.png'} name={'Alex'} description={"Been using this platform for a while, never disappointed."} />
+
       </div>
     </animated.div>
   );

@@ -10,6 +10,9 @@ import {loadStripe} from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import CheckoutForm from './CheckoutForm';
 import { useLoadUserQuery } from '@/redux/features/api/apiSlice';
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { Rating } from '@mui/material';
+import Ratings from './Ratings';
 
 type Props = {
   id: string;
@@ -17,8 +20,7 @@ type Props = {
 
 const CourseDetails = ({ id }: Props) => {
   const { data } = useGetCourseDetailsQuery(id);
-  const { data: userDetails } = useLoadUserQuery(undefined, {});
-  const user = userDetails?.user;
+  const { data: userData, refetch } = useLoadUserQuery(undefined, {refetchOnMountOrArgChange: true});
   const [open, setOpen] = React.useState(false);
   const { data: config} = useGetStripePublishableKeyQuery({})
   const [createPaymentIntent, {data: paymentIntentData}] = useCreatePaymentIntentMutation();
@@ -29,8 +31,7 @@ const CourseDetails = ({ id }: Props) => {
     ? parseFloat((((data.course.estimatedPrice - data.course.price) / data.course.estimatedPrice) * 100).toFixed(0))
     : 0;
 
-  const isPurchased = user && user?.courses?.some((course: any) => course.courseId === id);
-
+  const isPurchased = userData && userData?.user?.courses?.some((course: any) => course.courseId === id);
 
 
   useEffect(() => {
@@ -64,9 +65,12 @@ const CourseDetails = ({ id }: Props) => {
           <div className="space-y-8 w-[80%]">
             <div>
               <h1 className='text-3xl font-bold'>{data?.course?.name}</h1>
-              <div className='flex items-center space-x-2'>
-                <span className='text-yellow-500 '>☆☆☆☆☆</span>
-                <span>0 Reviews</span>
+              <div className='flex justify-between'>
+                <div className='flex items-center space-x-2'>
+                  <Ratings data={data} />
+                  <span>{data?.course?.reviews.length} Reviews</span>
+                </div>
+                  <span>{data?.course?.purchased} Students</span>
               </div>
             </div>
 
@@ -75,7 +79,7 @@ const CourseDetails = ({ id }: Props) => {
               <h2 className='text-2xl font-semibold'>What you will learn from this course?</h2>
               <ul className='mt-2 space-y-1'>
                 {data?.course?.benefits?.map((item: any, index: number) => (
-                  <li key={index} className='flex items-center space-x-2'>
+                  <li key={index} className='flex items-start space-x-2'>
                     <span>✔️</span>
                     <span>{item?.title || 'abc'}</span>
                   </li>
@@ -88,7 +92,7 @@ const CourseDetails = ({ id }: Props) => {
               <h2 className='text-2xl font-semibold'>What are the prerequisites for starting this course?</h2>
               <ul className='mt-2 space-y-1'>
                 {data?.course?.prerequisites?.map((item: any, index: number) => (
-                  <li key={index} className='flex items-center space-x-2'>
+                  <li key={index} className='flex items-start space-x-2'>
                     <span>✔️</span>
                     <span>{item.title || 'abc'}</span>
                   </li>
@@ -165,7 +169,7 @@ const CourseDetails = ({ id }: Props) => {
                   {
                     stripePromise && clientSecret && (
                       <Elements stripe={stripePromise} options={{clientSecret}}>
-                        <CheckoutForm  data={data} setOpen={setOpen}/>
+                        <CheckoutForm  data={data} setOpen={setOpen} user={userData.user} refetch={refetch}/>
                       </Elements>
                     )
                   }

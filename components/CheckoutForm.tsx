@@ -1,29 +1,25 @@
 import { useLoadUserQuery } from '@/redux/features/api/apiSlice'
 import { useCreateOrderMutation } from '@/redux/features/orders/orderApi'
 import { LinkAuthenticationElement, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import { Router } from 'lucide-react'
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
+import { getSocket } from "@/utils/socket";
 
 type Props = {
     data: any,
     setOpen: any,
+    user: any,
+    refetch: any
 }
 
-const CheckoutForm = ({ data, setOpen }: Props) => {
+const CheckoutForm = ({ data, setOpen, user, refetch }: Props) => {
     const stripe = useStripe()
     const elements = useElements()
     const [message, setMessage] = React.useState<string>('')
     const [isLoading, setIsLoading] = React.useState<boolean>(false)
     const [createOrder, { data: orderData, error: orderError }] = useCreateOrderMutation()
-    const [loadUser, setLoadUser] = React.useState<boolean>(false)
-    const { } = useLoadUserQuery({ skip: loadUser ? false : true })
     const router = useRouter()
-
-    // State for new fields
-    // const [customerName, setCustomerName] = React.useState<string>('')
-    // const [customerAddress, setCustomerAddress] = React.useState<string>('')
-
+    const socket = getSocket();
 
     const handleSubmit = async (e: any) => {
 
@@ -44,13 +40,13 @@ const CheckoutForm = ({ data, setOpen }: Props) => {
             setMessage(error.message || 'An unknown error occurred')
             setIsLoading(false)
         } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-            setIsLoading(false)
-            setMessage('')
             createOrder({
                 courseId: data.course._id,
                 paymentInfo: paymentIntent,
             })
-            router.refresh()
+            setIsLoading(false)
+            setMessage('')
+            
         }
     }
 
@@ -59,13 +55,24 @@ const CheckoutForm = ({ data, setOpen }: Props) => {
     useEffect(() => {
         if (orderData) {
             setOpen(false)
-            setLoadUser(true)
-            router.push(`/course-access/${data?.course?._id}`)
+            refetch()
+            // console.log('Order created successfully:', orderData);
+
+            // Emit socket notification
+            socket.emit("notification", {
+                title: "Course Purchase",
+                message: `You have a new order from ${data?.course?.name}`,
+                userId: user._id
+            });
+
+            console.log('Redirecting to:', `/course-access/${data.course._id}`);
+            router.push(`/course-access/${data.course._id}`);
         }
         if (orderError) {
-            console.log(orderError)
+            console.error('Order creation error:', orderError);
         }
-    }, [orderData])
+    }, [orderData, orderError]);
+
 
     return (
         <form id="payment-form" onSubmit={handleSubmit}>

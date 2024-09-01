@@ -49,7 +49,7 @@ const Login = () => {
             email: sessionData.user.email,
             name: sessionData.user.name,
             avatar: sessionData.user.image,
-          }).then(() => router.push("/"));
+          })
         }
       }
     };
@@ -59,14 +59,13 @@ const Login = () => {
 
   useEffect(() => {
     if (socialSuccess) {
-      toast.success(`Welcome ${socialData.user.name}`);
+      router.push("/");
     }
   }, [socialSuccess, socialData]);
 
   useEffect(() => {
     if (isSuccess) {
       console.log(data.message);
-      toast.success(`Welcome ${data.user.name}`);
       router.push("/");
     }
 
@@ -106,7 +105,7 @@ const Login = () => {
           width: "100%",
         }}
         className={
-          "h-full py-5 bg-[url(/login.png)] dark:bg-[url(/darkLogin.png)] transition-all duration-1000 ease-out"
+          "h-full py-5 bg-[url(/login.png)] dark:bg-[url(/darkLogin.png)] bg-[#F7F1FF] dark:bg-slate-950 transition-all duration-1000 ease-out"
         }
       >
         <div className="px-28 ">

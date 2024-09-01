@@ -29,7 +29,6 @@ const Navbar = () => {
   const params = usePathname();
 
   const { user } = useSelector((state: any) => state.auth);
-  console.log(user);
 
   // if (typeof window !== 'undefined') {
   //   window.addEventListener('scroll', () => {
@@ -100,13 +99,11 @@ const Navbar = () => {
               </div>
             )}
 
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-6 ">
               <ThemeSwitcher />
 
-              <IoNotificationsOutline className="text-[#4A1F64] text-2xl dark:text-white dark:hover:text-[var(--darkline)]" />
-
               {user && (
-                <Link href={"/profile"}>
+                <Link href={"/profile"} className="mr-4">
                   <Image
                     src={user?.avatar?.url || "/user.png"}
                     alt="user"
@@ -119,10 +116,10 @@ const Navbar = () => {
 
               {params !== "/login" && params !== "/signup" && !user && (
                 <Link
-                  href="/signup"
-                  className="text-[#ebe8ec] bg-gradient-to-r from-[var(--darkline)] to-[var(--darker)] py-2 px-6 rounded-full font-normal"
+                  href="/login"
+                  className="text-[#ebe8ec] mr-4 bg-gradient-to-r from-[var(--darkline)] to-[var(--darker)] py-2 px-6 rounded-full font-normal"
                 >
-                  signup
+                  Login
                 </Link>
               )}
             </div>

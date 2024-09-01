@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -34,13 +34,51 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
 import "/app.css";
+import { getSocket, initSocket } from "@/utils/socket";
+import { useGetNotificationsQuery, useUpdateNotificationStatusMutation } from "@/redux/features/notifications/notificationApi";
+import {format} from 'timeago.js'
 const drawerWidth = 230;
 
 const AdminSideBar = () => {
     const { user } = useSelector((state: any) => state.auth);
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [isClosing, setIsClosing] = React.useState(false);
+    const [notifications, setNotifications] = React.useState([]);
+    const [open, setOpen] = useState(false);
+    const [audio] = useState(new Audio("/notifi.mp3"));
     const pathname = usePathname();
+    let socket = getSocket()
+    const {data, refetch} = useGetNotificationsQuery(undefined, {refetchOnMountOrArgChange: true})
+    const [updateNotificationStatus, {isSuccess}] = useUpdateNotificationStatusMutation()
+
+    const notificationSound = () => {
+        audio.play()
+    }
+
+   useEffect(() => {
+         if(data){
+             setNotifications(data.notifications.filter((notification: any) => notification.status === "unread"))
+         }
+         if(isSuccess){
+            refetch()
+         }
+         audio.load()
+    } , [data, isSuccess])
+
+    useEffect(()=> {
+        if (socket) {
+            socket.on("newNotification", (data: any) => {
+                refetch()
+                notificationSound()
+            }
+            )
+        }
+    },[socket])
+
+    const handleNotificationStatus = (id: string, event: React.MouseEvent) => {
+        event.stopPropagation()
+        updateNotificationStatus(id)
+    }
 
     const handleDrawerClose = () => {
         setIsClosing(true);
@@ -288,11 +326,37 @@ const AdminSideBar = () => {
                     ml: { sm: `${drawerWidth}px` },
                 }}
             >
-                <Toolbar className="bg-[var(--lightest)] dark:bg-[var(--darkbg)]  ">
+                <Toolbar className=" bg-[var(--lightest)] dark:bg-[var(--darkbg)] text-black dark:text-white ">
                     <div className="flex items-center text-[var(--darker)] justify-end gap-4 w-full mx-auto mr-8">
                         <ThemeSwitcher />
-                        <IoNotificationsOutline className="dark:text-slate-300 text-2xl" />
+                        <div className="relative cursor-pointer" onClick={() => setOpen((prev) => !prev )}>
+                            <IoNotificationsOutline className="dark:text-slate-300 text-2xl" />
+                            <span className="absolute -top-2 -right-2 bg-cyan-400 rounded-full w-5 h-5 text-[12px] flex items-center justify-center ">
+                                {notifications && notifications.length}
+                            </span>
+                            {
+                              notifications.length > 0 &&  open && (
+                                    <div className="absolute w-[360px] right-0 h-[65vh] z-10 overflow-y-scroll px-3 py-4  dark:bg-slate-700 bg-slate-300 shadow-xl text-black dark:text-white rounded-sm ">
+                                        <h1 className="text-center text-lg font-bold p-3">Notifications</h1>
+                                        {
+                                            notifications && notifications.map((notification: any) => (
+                                                <div key={notification._id} className="p-3 border dark:bg-slate-800 bg-white shadow-lg rounded-lg my-2">
+                                                    <div className="flex justify-between">
+                                                        <h1 className="font-semibold">{notification.title}</h1>
+                                                        <button onClick={(event) => handleNotificationStatus(notification._id, event)} className="text-green-500 text-sm px-2 ">Mark as Read</button>
+                                                    </div>
+                                                    <p>{notification.message}</p>
+                                                    <p className="flex justify-end dark:text-slate-400 text-sm text-slate-700">{format(notification.createdAt)} </p>
+                                                </div>
+                                            ))
+
+                                        }
+                                    </div>
+                                )
+                            }
+                        </div>
                     </div>
+                    
                 </Toolbar>
             </AppBar>
 

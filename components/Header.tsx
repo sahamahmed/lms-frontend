@@ -24,7 +24,7 @@ const Header = () => {
   };
 
   return (
-    <div className="space-y-8 min-h-full h-auto text-slate-800 dark:text-white">
+    <div className="space-y-8 min-h-full h-auto text-slate-800 dark:text-white mt-6">
       <div className="grid grid-cols-12">
         <div className=" col-span-8 z-10">
           <div className="flex gap-4">
