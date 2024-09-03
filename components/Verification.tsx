@@ -42,6 +42,7 @@ export default function Verification({onClose}: {onClose: () => void}) {
         }
         if(error){
             console.log(error)
+            toast.error("Invalid OTP")
         }
 
     }, [isSuccess, error,data])

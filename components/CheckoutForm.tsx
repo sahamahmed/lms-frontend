@@ -4,6 +4,7 @@ import { LinkAuthenticationElement, PaymentElement, useElements, useStripe } fro
 import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
 import { getSocket } from "@/utils/socket";
+import Loader from './Loader'
 
 type Props = {
     data: any,
@@ -55,9 +56,6 @@ const CheckoutForm = ({ data, setOpen, user, refetch }: Props) => {
     useEffect(() => {
         if (orderData) {
             setOpen(false)
-            refetch()
-            // console.log('Order created successfully:', orderData);
-
             // Emit socket notification
             socket.emit("notification", {
                 title: "Course Purchase",
@@ -65,8 +63,9 @@ const CheckoutForm = ({ data, setOpen, user, refetch }: Props) => {
                 userId: user._id
             });
 
-            console.log('Redirecting to:', `/course-access/${data.course._id}`);
-            router.push(`/course-access/${data.course._id}`);
+            router.refresh()
+            refetch()
+
         }
         if (orderError) {
             console.error('Order creation error:', orderError);
@@ -84,7 +83,7 @@ const CheckoutForm = ({ data, setOpen, user, refetch }: Props) => {
             <div className='mt-6 flex justify-center'>
                 <button disabled={isLoading || !stripe || !elements} id="submit" className='w-[30%] bg-yellow-500 py-3 px-4 rounded-lg '>
                     <span id="button-text">
-                        {isLoading ? "Loading": "Pay now"}
+                        {isLoading ? <Loader size={20}/> : "Pay now"}
                     </span>
                 </button>
             </div>

@@ -72,7 +72,7 @@ const Signup = () => {
           width: "100%",
         }}
         className={
-          "h-full py-5 bg-[url(/signup.png)] dark:bg-[url(/darkSignup.png)] transition-all duration-1000 ease-out"
+          "h-full py-5 bg-[url(/signup.png)] dark:bg-[url(/darkSignup.png)] bg-[#F7F1FF] dark:bg-slate-950  transition-all duration-1000 ease-out"
         }
       >
         <div className="px-28 ">

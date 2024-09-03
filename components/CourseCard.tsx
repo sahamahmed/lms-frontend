@@ -11,11 +11,17 @@ import {
 } from "@/components/ui/card";
 import { RiStarSFill } from "react-icons/ri";
 import { TfiMenuAlt } from "react-icons/tfi";
+import Ratings from "./Ratings";
 
-const CourseCard = ({course}: any) => {
+type Props = {
+  course: any;
+  isMine?: boolean;
+};
+
+const CourseCard = ({course, isMine}: Props) => {
   return (
-    <Link href={`/course/${course._id}`}>
-      <Card className=" px-4 pt-4 pb-2 shadow-md shadow-purple-200 dark:shadow-[var(--darkbg)] cursor-pointer scale-100 hover:scale-105 opacity-100 h-[22rem] rounded-xl border-slate-300 dark:border-none relativetransition ease-out duration-500 hover:shadow-lg ">
+    <Link href={isMine ? `/course-access/${course._id}` : `/course/${course._id}`}>
+      <Card className={` px-4 pt-4 pb-2 shadow-md shadow-purple-200 dark:shadow-[var(--darkbg)] cursor-pointer scale-100 hover:scale-105 opacity-100 ${isMine ? 'h-[18rem]' : 'h-[22rem]'} rounded-xl border-slate-300 dark:border-none relativetransition ease-out duration-500 hover:shadow-lg `}>
         <div className="relative w-full h-[55%] rounded border border-slate-500">
           <Image
             src={course?.thumbnail?.url ||"/computer.png" }
@@ -34,24 +40,22 @@ const CourseCard = ({course}: any) => {
         </CardHeader>
 
         <div className="flex flex-col dark:text-slate-100  h-[20%] text-slate-600 ">
-          <div className="flex justify-between items-center">
-            <CardContent className="p-0 flex flex-row justify-center items-center">
-              <RiStarSFill className=" text-yellow-400" />
-              <RiStarSFill className=" text-yellow-400" />
-              <RiStarSFill className=" text-yellow-400" />
-              <RiStarSFill className=" text-yellow-400" />
-              <RiStarSFill className=" text-yellow-400" />
-            </CardContent>
+          {
+            !isMine && (
+              <div className="flex justify-between items-center">
+                <Ratings data={course} size={16} />
 
-            <CardDescription className="text-slate-600 dark:text-slate-100 ">
-              780 students
-            </CardDescription>
-          </div>
+                <CardDescription className="text-slate-600 dark:text-slate-100 ">
+                  {course?.purchased} students
+                </CardDescription>
+              </div>
+            )
+          }
 
           <CardFooter className="flex flex-row justify-between items-center p-0 mt-2">
             <p>${course?.price}</p>
-            <p className="flex flex-row gap-x-1 justify-end items-center">
-              <TfiMenuAlt className="" /> 55 Lectures
+            <p className="flex flex-row gap-x-2 justify-end items-center">
+              <TfiMenuAlt className="" /> {course?.courseData?.length || 10} Lectures
             </p>
           </CardFooter>
         </div>

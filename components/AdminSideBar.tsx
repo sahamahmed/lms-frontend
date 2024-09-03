@@ -288,30 +288,7 @@ const AdminSideBar = () => {
 
             <Divider className="bg-gray-300 dark:bg-gray-700  m-0 p-0" />
 
-            <List className="">
-                {[
-                    { text: "Logout", href: "/admin/logout", icon: <HistoryIcon /> },
-                ].map((item, index) => (
-                    <ListItem
-                        key={index}
-                        disablePadding
-                        className={
-                            pathname === item.href
-                                ? "bg-[#7c40b99f]  dark:bg-[#5544666c] text-white"
-                                : ""
-                        }
-                    >
-                        <ListItemButton>
-                            <ListItemIcon className="dark:text-slate-300">
-                                {item.icon}
-                            </ListItemIcon>
-                            <Link href={item.href}>
-                                <ListItemText primary={item.text} />
-                            </Link>
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
+           
         </div>
     );
 

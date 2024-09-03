@@ -37,7 +37,7 @@ export const apiSlice = createApi({
             user: result.data.user,
           }))
         } catch (error) {
-          console.error("Error during registration:", error);
+          // console.error("Error loading user:", error);
         }
       }
         })

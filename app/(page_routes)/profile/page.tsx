@@ -1,58 +1,37 @@
 "use client";
 import { useLogoutQuery } from "@/redux/features/auth/authApi";
 import { signOut, useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 import React from "react";
 import { useSelector } from "react-redux";
 import { VscAccount } from "react-icons/vsc";
 import { SiCoursera } from "react-icons/si";
 import { PiPasswordBold } from "react-icons/pi";
-import { RiLogoutCircleLine } from "react-icons/ri";
-import { User } from "lucide-react";
+import { RiLogoutCircleLine, RiAdminLine } from "react-icons/ri";
 import UserInfo from "@/components/UserInfo";
 import UserPassword from "@/components/userPassword";
 import EnrolledCourses from "@/components/EnrolledCourses";
 import Link from "next/link";
-import { RiAdminLine } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 import UseProtected from "@/hooks/useProtected";
-import { set } from "zod";
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog"; 
 
 const Page = () => {
   const { user } = useSelector((state: any) => state.auth);
-  console.log(user);
   const [tab, setTab] = React.useState("My Account");
   const [logoutState, setLogoutState] = React.useState(false);
   const data = useSession();
-  console.log(data);
+  console.log(data)
   const router = useRouter();
-
-  const sections = [
-    {
-      icon: <VscAccount className="text-black dark:text-slate-200 text-2xl" />,
-      label: "My Account",
-    },
-    ...(data.data === null
-      ? [
-        {
-          icon: (
-            <PiPasswordBold className="text-black dark:text-slate-200 text-2xl" />
-          ),
-          label: "Change Password",
-        },
-      ]
-      : []),
-    {
-      icon: <SiCoursera className="text-black dark:text-slate-200 text-2xl" />,
-      label: "Enrolled Courses",
-    },
-    {
-      icon: (
-        <RiLogoutCircleLine className="text-black dark:text-slate-200 text-2xl" />
-      ),
-      label: "Logout",
-    },
-  ];
 
   useLogoutQuery(undefined, {
     skip: !logoutState ? true : false,
@@ -60,76 +39,116 @@ const Page = () => {
 
   const logoutHandler = async () => {
     if (data.data !== null) {
-      console.log("if ran");
+      console.log('if ran')
       await signOut().then(() => setLogoutState(true));
     }
     if (data.data === null) {
-      console.log("else ran");
+      console.log('else ran')
       setLogoutState(true);
-    }
-
-    // router.push('/')
-  };
-
-  const handleTabClick = (label: string) => {
-    if (label === "Logout") {
-      logoutHandler();
-      setTab(label);
-    } else {
-      setTab(label);
     }
   };
 
   return (
-    <>
-      <UseProtected>
-        <div className=" mx-auto w-full flex gap-10 ">
-          <div className="bg-[#d5b8fa9f] dark:bg-[#3311475e] min-h-[30rem] w-[25%] rounded-lg flex flex-col pb-4">
-            {sections.map((section, index) => (
-              <section
-                key={index}
-                className={`py-4 border-b border-b-slate-200 cursor-pointer ${tab === "My Account" ? "rounded-tr-lg rounded-tl-lg" : ""
-                  } ${tab === section.label ? "bg-[#685275]" : ""}`}
-                onClick={() => handleTabClick(section.label)}
-              >
+    <UseProtected>
+      <div className="mx-auto w-full flex gap-10">
+        <div className="bg-[#d5b8fa9f] dark:bg-[#3311475e] min-h-[30rem] w-[25%] rounded-lg flex flex-col pb-4">
+          <section
+            className={`py-4 border-b border-b-slate-200 cursor-pointer ${tab === "My Account" ? "bg-[#685275]" : ""
+              }`}
+            onClick={() => setTab("My Account")}
+          >
+            <div className="flex justify-start items-center gap-3 px-6">
+              <VscAccount className="text-black dark:text-slate-200 text-2xl" />
+              <h1 className="text-black dark:text-slate-200 text-xl font-normal">
+                My Account
+              </h1>
+            </div>
+          </section>
+
+          {data.data === null && (
+            <section
+              className={`py-4 border-b border-b-slate-200 cursor-pointer ${tab === "Change Password" ? "bg-[#685275]" : ""
+                }`}
+              onClick={() => setTab("Change Password")}
+            >
+              <div className="flex justify-start items-center gap-3 px-6">
+                <PiPasswordBold className="text-black dark:text-slate-200 text-2xl" />
+                <h1 className="text-black dark:text-slate-200 text-xl font-normal">
+                  Change Password
+                </h1>
+              </div>
+            </section>
+          )}
+
+          <section
+            className={`py-4 border-b border-b-slate-200 cursor-pointer ${tab === "Enrolled Courses" ? "bg-[#685275]" : ""
+              }`}
+            onClick={() => setTab("Enrolled Courses")}
+          >
+            <div className="flex justify-start items-center gap-3 px-6">
+              <SiCoursera className="text-black dark:text-slate-200 text-2xl" />
+              <h1 className="text-black dark:text-slate-200 text-xl font-normal">
+                Enrolled Courses
+              </h1>
+            </div>
+          </section>
+
+          {user && user.role === "admin" && (
+            <Link href={"/admin"}>
+              <section className="py-4 border-b border-b-slate-200 cursor-pointer">
                 <div className="flex justify-start items-center gap-3 px-6">
-                  {section.icon}
+                  <RiAdminLine
+                    size={26}
+                    className="text-black dark:text-slate-200"
+                  />
                   <h1 className="text-black dark:text-slate-200 text-xl font-normal">
-                    {section.label}
+                    Admin Dashboard
                   </h1>
                 </div>
               </section>
-            ))}
-            {user && user.role === "admin" && (
-              <Link href={"/admin"}>
-                <section
-                  className={`py-4 border-b border-b-slate-200 cursor-pointer `}
-                >
-                  <div className="flex justify-start items-center gap-3 px-6">
-                    <RiAdminLine
-                      size={26}
-                      className="text-black dark:text-slate-200"
-                    />
-                    <h1 className="text-black dark:text-slate-200 text-xl font-normal">
-                      {" "}
-                      Admin Dashboard
-                    </h1>
-                  </div>
-                </section>
-              </Link>
-            )}
-          </div>
+            </Link>
+          )}
 
-          <div className="w-[75%]">
-            {tab === "My Account" && <UserInfo user={user} />}
-            {data.data === null && tab === "Change Password" && (
-              <UserPassword user={user} />
-            )}
-            {tab === "Enrolled Courses" && <EnrolledCourses user={user} />}
-          </div>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <section className="py-4 border-b border-b-slate-200 cursor-pointer">
+                <div className="flex justify-start items-center gap-3 px-6">
+                  <RiLogoutCircleLine className="text-black dark:text-slate-200 text-2xl" />
+                  <h1 className="text-black dark:text-slate-200 text-xl font-normal">
+                    Logout
+                  </h1>
+                </div>
+              </section>
+            </AlertDialogTrigger>
+            <AlertDialogContent className="bg-white dark:bg-slate-800 text-black dark:text-slate-200">
+              <AlertDialogHeader>
+                <AlertDialogTitle className="text-lg font-bold dark:text-white">Are you sure?</AlertDialogTitle>
+                <AlertDialogDescription className="text-sm dark:text-gray-300">
+                  Do you really want to log out?
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel className="font-bold">Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={logoutHandler} className="font-bold bg-red-500 hover:bg-red-600">
+                  Continue
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+
+
+          
         </div>
-      </UseProtected>
-    </>
+
+        <div className="w-[75%]">
+          {tab === "My Account" && <UserInfo user={user} />}
+          {data.data === null && tab === "Change Password" && (
+            <UserPassword user={user} />
+          )}
+          {tab === "Enrolled Courses" && <EnrolledCourses user={user} />}
+        </div>
+      </div>
+    </UseProtected>
   );
 };
 

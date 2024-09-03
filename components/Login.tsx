@@ -29,6 +29,7 @@ import { signIn, useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
 import Navbar from "./Navbar";
 import "/app.css";
+
 const Login = () => {
   const [login, { data, error, isSuccess }] = useLoginMutation();
   const router = useRouter();
@@ -42,30 +43,24 @@ const Login = () => {
   console.log(socialData);
 
   useEffect(() => {
+    console.log('ran')
     const handleSocialLogin = async () => {
-      if (!user) {
-        if (sessionData && sessionData?.user) {
+        if (!user && sessionData && sessionData?.user) {
           await sociallogin({
             email: sessionData.user.email,
             name: sessionData.user.name,
             avatar: sessionData.user.image,
           })
-        }
-      }
+        }  
     };
 
     handleSocialLogin();
   }, [sessionData, user, sociallogin, router]);
 
-  useEffect(() => {
-    if (socialSuccess) {
-      router.push("/");
-    }
-  }, [socialSuccess, socialData]);
+  
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(data.message);
       router.push("/");
     }
 

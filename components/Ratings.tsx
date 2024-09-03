@@ -5,18 +5,19 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
 type Props = {
     data: any
+    size?: number
 }
 
-const Ratings = ({data}: Props) => {
+const Ratings = ({data, size}: Props) => {
   return (
 
     <span className='text-yellow-500 flex'>
         {[1, 2, 3, 4, 5].map((item, index) => {
-            if (data?.course?.ratings >= item) {
+            if (data?.ratings >= item) {
                 // Full star
                 return (
                     <AiFillStar
-                        size={24}
+                        size={size ? size : 24}
                         key={index}
                         className='cursor-pointer text-yellow-500'
                     />
@@ -26,12 +27,12 @@ const Ratings = ({data}: Props) => {
                 return (
                     <div key={index} className='relative'>
                         <AiFillStar
-                            size={24}
+                            size={size ? size : 24}
                             className='cursor-pointer text-yellow-500'
                             style={{ position: 'absolute', clipPath: 'inset(0 50% 0 0)' }} // Half star fill
                         />
                         <AiOutlineStar
-                            size={24}
+                            size={size ? size : 24}
                             className='cursor-pointer text-yellow-500'
                         />
                     </div>
@@ -40,7 +41,7 @@ const Ratings = ({data}: Props) => {
                 // Empty star
                 return (
                     <AiOutlineStar
-                        size={24}
+                        size={size ? size : 24}
                         key={index}
                         className='cursor-pointer text-yellow-500'
                     />

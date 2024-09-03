@@ -13,19 +13,22 @@ import { useLoadUserQuery } from '@/redux/features/api/apiSlice';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { Rating } from '@mui/material';
 import Ratings from './Ratings';
+import { useRouter } from 'next/navigation';
+import Loader from './Loader';
 
 type Props = {
   id: string;
 }
 
 const CourseDetails = ({ id }: Props) => {
-  const { data } = useGetCourseDetailsQuery(id);
+  const { data , isLoading } = useGetCourseDetailsQuery(id);
   const { data: userData, refetch } = useLoadUserQuery(undefined, {refetchOnMountOrArgChange: true});
   const [open, setOpen] = React.useState(false);
   const { data: config} = useGetStripePublishableKeyQuery({})
   const [createPaymentIntent, {data: paymentIntentData}] = useCreatePaymentIntentMutation();
    const [stripePromise, setStripePromise] = React.useState<any>(null);
    const [clientSecret, setClientSecret] = React.useState<string>('');
+   const router = useRouter();
 
   const discountPercent: number = data?.course?.estimatedPrice && data?.course?.price
     ? parseFloat((((data.course.estimatedPrice - data.course.price) / data.course.estimatedPrice) * 100).toFixed(0))
@@ -54,7 +57,19 @@ const CourseDetails = ({ id }: Props) => {
 
   const handleOrder = (e: any) => {
     e.preventDefault();
-    setOpen(true)
+    if (!userData?.user) {
+     router.push('/login')   
+    }else {
+      setOpen(true)
+    }
+  }
+
+  if (isLoading) {
+    return (
+      <div className='h-screen'>
+        <Loader />
+      </div>
+    )
   }
 
   return (
@@ -67,7 +82,7 @@ const CourseDetails = ({ id }: Props) => {
               <h1 className='text-3xl font-bold'>{data?.course?.name}</h1>
               <div className='flex justify-between'>
                 <div className='flex items-center space-x-2'>
-                  <Ratings data={data} />
+                  <Ratings data={data?.course} />
                   <span>{data?.course?.reviews.length} Reviews</span>
                 </div>
                   <span>{data?.course?.purchased} Students</span>
