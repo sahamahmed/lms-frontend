@@ -43,7 +43,7 @@ export default function AllCourses() {
     const rows = data?.courses?.map((course: any, index: number) => ({
         id: course._id,
         title: course.name,
-        ratings: course.ratings,
+        ratings: course.ratings.toFixed(1),
         purchased: course.purchased,
         createdAt: format(course.createdAt),
     })) || [];
@@ -111,7 +111,9 @@ export default function AllCourses() {
     ];
 
     return (
-        <div style={{ minHeight: 500, width: '95%' }} className="mt-24">
+        <div style={{ minHeight: 500, width: '95%' }} className="">
+            <h1 className='font-bold text-4xl mb-6 dark:text-slate-100 text-slate-800'>Courses</h1>
+
             <DataGrid
                 rows={rows}
                 columns={columns}

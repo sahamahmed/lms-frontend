@@ -56,7 +56,7 @@ const EditHero = (props: Props) => {
   }
 
   return (
-    <div className="w-full py-28 px-5 ">
+    <div className="w-full min-h-screen bg-[#F7F1FF] bg-no-repeat dark:bg-slate-950 py-28 px-5 ">
       <div className="grid grid-cols-12 gap-8">
         <div className=" col-span-5 relative w-fit rounded-full">
           <Image

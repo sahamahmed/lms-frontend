@@ -148,7 +148,7 @@ const CourseContent = ({ active, setActive, courseContentData, setCourseContentD
   };
 
   return (
-    <div className="w-[80%] dark:text-white ml-8 mt-24 mb-6">
+    <div className="w-[80%] dark:text-white ml-8 mt-24 mb-6 min-h-screen bg-[#F7F1FF]">
       {courseContentData.map((section: any, index: number) => (
         <div
           key={index}

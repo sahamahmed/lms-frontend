@@ -1,6 +1,7 @@
 'use client'
 import CourseCard from '@/components/CourseCard'
 import Footer from '@/components/Footer'
+import Loader from '@/components/Loader'
 import Navbar from '@/components/Navbar'
 import Seperator from '@/components/Seperator'
 import { useGetCoursesQuery } from '@/redux/features/courses/courseApi'
@@ -39,7 +40,7 @@ const Page = () => {
     <>
       <div className="px-16 py-5 text-slate-800 dark:text-slate-200">
         {isLoading ? (
-          <h1>Loading...</h1>
+          <Loader />
         ) : (
           <main className="space-y-8 w-full">
             <div className="w-[90%] mx-auto flex gap-6 flex-wrap">

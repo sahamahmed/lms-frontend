@@ -30,7 +30,9 @@ export default function AllOrders(props: Props) {
   ];
 
   return (
-    <div className=" relative">
+    <div className=" relative min-h-screen bg-[#F7F1FF] bg-no-repeat dark:bg-slate-950">
+      <h1 className='font-bold text-4xl mb-6 dark:text-slate-100 text-slate-800'>Orders</h1>
+
       <div style={{ width: "95%" }}>
         <DataGrid
           rows={rows}

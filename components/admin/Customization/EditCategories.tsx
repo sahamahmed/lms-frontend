@@ -80,7 +80,7 @@ const EditCategories = (props: Props) => {
   };
 
   return (
-    <div className="w-full  px-5">
+    <div className="w-full min-h-screen bg-[#F7F1FF] bg-no-repeat dark:bg-slate-950 px-5">
       <h1 className="text-center text-2xl font-bold dark:text-slate-300 mb-6">
         CATEGORIES
       </h1>

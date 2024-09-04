@@ -23,7 +23,7 @@ const getPath = (x, y, width, height) => {
   Z`;
 };
 
-const TriangleBar = (props) => {
+const TriangleBar = (props:any) => {
   const { fill, x, y, width, height } = props;
   return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
 };
@@ -38,7 +38,7 @@ const CourseAnalytics = () => {
     })) || [];
 
   return (
-    <div>
+    <div className="min-h-screen w-full bg-[#F7F1FF] bg-no-repeat dark:bg-slate-950">
       <div className="space-y-4 mb-4">
         <h1 className="font-bold text-4xl dark:text-slate-100 text-slate-800">
           Course Analytics

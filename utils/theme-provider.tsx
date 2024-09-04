@@ -1,6 +1,7 @@
 'use client'
+import Loader from "@/components/Loader"
 import { useLoadUserQuery } from "@/redux/features/api/apiSlice"
-import { Loader } from "lucide-react"
+
 import { ThemeProvider as NextThemeProvider } from "next-themes"
 import type { ThemeProviderProps } from "next-themes/dist/types"
 import { FC, ReactNode } from "react"
@@ -17,6 +18,10 @@ export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => (
 const Custom: FC<{ children: ReactNode }> = ({ children }) => {
   const {isLoading} = useLoadUserQuery({})
   return (
-    isLoading ? <Loader size={50} /> : <>{children}</>
+    isLoading ? (
+      <div className="h-screen w-full">
+        <Loader />
+      </div>
+    ) : (<>{children}</>)
   );
 }

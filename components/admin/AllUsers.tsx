@@ -169,7 +169,9 @@ export default function AllUsers({ type }: Props) {
     
 
     return (
-        <div className="mt-24 relative">
+        <div className=" min-h-screen bg-[#F7F1FF] bg-no-repeat dark:bg-slate-950 relative">
+            <h1 className='font-bold text-4xl mb-6 dark:text-slate-100 text-slate-800'>Users</h1>
+
             {type === 'team' && (
                 <div className='flex justify-end items-center w-[95%]'>
                     <button onClick={() => setOpen(true)} className=" text-slate-800 dark:text-white rounded-xl font-semibold bg-cyan-400 px-4 py-2 shadow-lg my-4  ">Add Member</button>

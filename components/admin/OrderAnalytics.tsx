@@ -20,8 +20,8 @@ const OrderAnalytics = () => {
     })) || [];
 
   return (
-    <div>
-      <div className="space-y-4 mb-4">
+    <div className="min-h-screen bg-[#F7F1FF] bg-no-repeat dark:bg-slate-950">
+      <div className="space-y-4 mb-4 ">
         <h1 className="font-bold text-4xl dark:text-slate-100 text-slate-800">
           Order Analytics
         </h1>

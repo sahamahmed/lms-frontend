@@ -70,7 +70,7 @@ const EditFAQ = (props: Props) => {
   };
 
   return (
-    <div className="w-full  px-5">
+    <div className="w-full min-h-screen bg-[#F7F1FF] bg-no-repeat dark:bg-slate-950  px-5">
       <div className=" mt-4 text-slate-400 dark:text-slate-600 font-semibold text-sm ">
         Click on existing FAQs to edit them
       </div>
