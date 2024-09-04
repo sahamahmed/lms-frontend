@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { toast } from 'sonner';
 import Link from 'next/link';
+import Loader from '../Loader';
 
 
 
@@ -39,6 +40,11 @@ export default function AllCourses() {
     const handleDeleteClick = (id: string) => {
         deleteCourse({ id })
     };
+
+    if (isLoading) {
+        return <div className='h-screen w-full'><Loader /></div>;
+        
+    }
 
     const rows = data?.courses?.map((course: any, index: number) => ({
         id: course._id,

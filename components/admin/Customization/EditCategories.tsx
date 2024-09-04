@@ -68,17 +68,7 @@ const EditCategories = (props: Props) => {
       })
     );
   };
-
-  const handleDelete = (index: number) => {
-    if (categories.length === 1) {
-      toast.error("Atleast one category is required");
-    } else {
-      setCategories((prevCategories) =>
-        prevCategories.filter((_, i) => i !== index)
-      );
-    }
-  };
-
+  
   return (
     <div className="w-full min-h-screen bg-[#F7F1FF] bg-no-repeat dark:bg-slate-950 px-5">
       <h1 className="text-center text-2xl font-bold dark:text-slate-300 mb-6">
@@ -101,10 +91,6 @@ const EditCategories = (props: Props) => {
                 value={category.title}
                 onChange={(e) => handleInputChange(index, e.target.value)}
                 className="border-none focus:border-none focus:outline-none bg-transparent text-center w-auto "
-              />
-              <RxCrossCircled
-                className="absolute top-2 font-bold cursor-pointer text-red-600 right-2 bg-transparent"
-                onClick={() => handleDelete(index)}
               />
             </div>
           ))}

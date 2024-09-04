@@ -17,6 +17,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { useTheme } from '@mui/material/styles';
+import Loader from '../Loader';
 
 
 
@@ -33,7 +34,6 @@ export default function AllUsers({ type }: Props) {
     const [deleteUser , {isSuccess: deleteSuccess , error: deleteError}] = useDeleteUserMutation();
     const [open, setOpen] = React.useState(false);
     const [email, setEmail] = React.useState('');
-    const theme = useTheme();
 
 
     React.useEffect(() => {
@@ -56,7 +56,7 @@ export default function AllUsers({ type }: Props) {
         }
     }, [roleSuccess, roleError, deleteSuccess, deleteError])
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <div className='h-screen w-full'><Loader /></div>;
     if (error) return <div>Error fetching users</div>;
 
     let rows = []

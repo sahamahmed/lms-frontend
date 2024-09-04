@@ -2,15 +2,17 @@ import { format } from "timeago.js";
 import * as React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useGetAllOrdersQuery } from "@/redux/features/orders/orderApi";
-import { ClassNames } from "@emotion/react";
+import Loader from "../Loader";
 
 interface Props {}
 
 export default function AllOrders(props: Props) {
-  const { data } = useGetAllOrdersQuery(
+  const { data , isLoading} = useGetAllOrdersQuery(
     {},
     { refetchOnMountOrArgChange: true }
   );
+
+  
 
   let rows =
     data?.orders?.map((order: any, index: number) => ({
@@ -28,6 +30,11 @@ export default function AllOrders(props: Props) {
     { field: "placedAt", headerName: "Placed At", flex: 1 },
     { field: "price", headerName: "Price", flex: 1 },
   ];
+
+  if (isLoading) {
+    return <div className='h-screen w-full'><Loader /></div>;
+
+  }
 
   return (
     <div className=" relative min-h-screen bg-[#F7F1FF] bg-no-repeat dark:bg-slate-950">
